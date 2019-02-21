@@ -21,5 +21,12 @@ package client;
  *
  */
 public class User extends Client {
+  
+  public User(String unNomServeur, int unNumero, String unLogin){
+    	numeroPort = unNumero;
+		  nomServeur = unNomServeur;
+      login = unLogin;
+      typeConnexio="@User";
+  }
 
 }
