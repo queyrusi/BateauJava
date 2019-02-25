@@ -22,7 +22,7 @@ import java.util.Observer;
  * # ascii art was generated on asciiflow.com/
  * 
  * <dl>
- * <dt><span class="strong">Remarque</span></dt><dd>{@code SystAlarme} est observeur et observable
+ * <dt><span class="strong">Remarque</span></dt><dd>{@code SystAlarme} est observer et observable
  * car elle doit recevoir une notification des capteurs, mais aussi notifier le système embarqué en cas
  * d'alarme.</dd>
  * </dl>

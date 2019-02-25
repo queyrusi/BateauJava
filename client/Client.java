@@ -7,6 +7,16 @@ import java.io.*;
 import java.net.*;
 import java.util.Observable;
 
+
+/**
+ * Client générique duquel hérite les client User et SystemeEmbarque.
+ * 
+ * Intègre l'ensemble des methodes qui permettent la gestion de connexion et le transfert d'informations vers un serveur TCP générique.
+ *
+ *
+ *
+ */
+
 @SuppressWarnings("deprecation")
 public abstract class Client extends Observable {
   
@@ -17,7 +27,7 @@ public abstract class Client extends Observable {
   
   	private String login;
   
- 	public String typeConnexion;
+ 	private String typeConnexion;
 
 	private Socket socketServeur;
 
@@ -28,13 +38,19 @@ public abstract class Client extends Observable {
 	/** Un client se connecte a un serveur identifie par un nom (unNomServeur), sur un port (unNumero), et s'identifie par un login unLogin */
 	public  Client(String unNomServeur, int unNumero, String unLogin) { 
 		
+		// TODO : vraie abstraction
 		numeroPort = unNumero;
 		nomServeur = unNomServeur;
     	login = unLogin;
-    	typeConnexion = "@AbstractClient";
+    	setTypeConnexion("@AbstractClient");
 	} 
-
-	public boolean connecterAuServeur() {        
+	/**
+	* Methode de connexion au serveur
+	*
+	* @return Renvoie true si la connexion a été éffectuée
+	*/
+	public boolean connecterAuServeur() { 
+		
 		boolean ok = false;
 		try {
 			System.out.println("Tentative : " + nomServeur + " -- " + numeroPort);
@@ -48,7 +64,7 @@ public abstract class Client extends Observable {
 			ok = true;
 			
 			// initialisation de la connexion :
-			socOut.println(typeConnexion);
+			socOut.println(getTypeConnexion());
 			socOut.println(login);
 			
 		} catch (UnknownHostException e) {
@@ -71,11 +87,41 @@ public abstract class Client extends Observable {
 		}
 		return ok;
 		
-	} 	
+	}
 	
-	public void deconnecterDuServeur() {        
+	
+	public int getNumeroPort() {
+		return numeroPort;
+	}
+
+	public void setNumeroPort(int numeroPort) {
+		this.numeroPort = numeroPort;
+	}
+
+	public String getNomServeur() {
+		return nomServeur;
+	}
+
+	public void setNomServeur(String nomServeur) {
+		this.nomServeur = nomServeur;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
+	
+	/**
+	* Methode de déconnexion au serveur
+	*/
+	public void deconnecterDuServeur() { 
 		try {
 			System.out.println("[ClientTCP] CLIENT : " + socketServeur);
+			socOut.println("@quit");
 			socOut.close();
 			socIn.close();
 			socketServeur.close();
@@ -84,7 +130,14 @@ public abstract class Client extends Observable {
 		}
 	} 	
 	
-	public String transmettreChaine(String uneChaine) {        
+	/**
+	 * Methode transmettant une chaine de caractères au serveur
+	 *
+	 * @param uneChaine Chaine à transmettre au serveur
+	 *
+	 * @return Message de réponse du serveur à la requête du Client
+	 */        
+	public String transmettreChaine(String uneChaine) {
 		String msgServeur = null;
 		try {
 			System.out.println( "Requete client : " + uneChaine );
@@ -102,31 +155,12 @@ public abstract class Client extends Observable {
 		return msgServeur;
 	} 
 
-	/* A utiliser pour ne pas deleguer la connexion aux interfaces GUI */
-	public String transmettreChaineConnexionPonctuelle(String uneChaine) {
-		String msgServeur = null;
-		String chaineRetour = "";
-		System.out.println("\nClient connexionTransmettreChaine " + uneChaine);
-		if (connecterAuServeur() == true) {
-			try {
-				socOut.println(uneChaine);
-				socOut.flush();
-				msgServeur = socIn.readLine();
-				while( msgServeur != null && msgServeur.length() >0) {
-					chaineRetour += msgServeur + "\n";
-					msgServeur = socIn.readLine();
-				}
-				System.out.println("Client msgServeur " + chaineRetour);
-				deconnecterDuServeur();
-			} catch (Exception e) {
-				System.err.println("Exception lors de la connexion client:  " + e);
-			}
-		}
-		else
-		{	
-			System.err.println("Connexion echouee");
-		}
-		return chaineRetour;
+	public String getTypeConnexion() {
+		return typeConnexion;
+	}
+
+	public void setTypeConnexion(String typeConnexion) {
+		this.typeConnexion = typeConnexion;
 	}
 
 }
