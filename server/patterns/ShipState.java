@@ -12,7 +12,7 @@ public abstract class ShipState {
 	/**
 	 * <strong>Description : </strong>Constructeur de l'état
 	 * @author C.Silva, R.Cuinat
-	 * @param ship Betau associé à l'état
+	 * @param ship Bateau associé à l'état
 	 */
 	public ShipState(Ship ship) {
 		// TODO Auto-generated constructor stub
