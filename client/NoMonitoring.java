@@ -44,6 +44,10 @@ public class NoMonitoring implements Etat {
 		systemeDuBateau = newSysEmbarque;
 		
 	}
+
+	public SystemeEmbarque getSystemeDuBateau() {
+		return systemeDuBateau;
+	}
 	
 	@Override
 	public void getStatus() {

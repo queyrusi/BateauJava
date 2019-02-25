@@ -43,6 +43,10 @@ public class Tracking implements Etat {
 		
 	}
 	
+	public SystemeEmbarque getSystemeDuBateau() {
+		return systemeDuBateau;
+	}
+	
 	@Override
 	public void getStatus() {
 		

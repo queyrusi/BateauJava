@@ -6,16 +6,6 @@ package client;
 /**
  * Discute avec le serveur (et peut lui envoyer des messages d'alarme)
  * 
- * Collaborateurs : 
- * 
- * +--------------+    +-------------+    +--------------+
- * |  ServeurTCP  |    |   Capteur   |    |     Etat     |
- * +--------------+    +-------------+    +--------------+
- * |              |    |             |    |              |
- * |              |    |             |    |              |
- * +--------------+    +-------------+    +--------------+
- *
- * # ascii art was generated on asciiflow.com/
  * 
  * @author chenqun
  *
@@ -38,7 +28,7 @@ public class SystemeEmbarque extends Client {
 	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin) {
 		
 		super(unNomServeur,unNumero,unLogin);
-		typeConnexion = "@Ship";
+		setTypeConnexion("@Ship");
 		
 		estSurveille = new Monitoring(this);
 		nonSurveille = new NoMonitoring(this);
