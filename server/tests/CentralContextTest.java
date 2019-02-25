@@ -16,7 +16,10 @@ import server.entities.TrustedContact;
 import server.entities.User;
 
 public class CentralContextTest {
-
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer que la suppression d'un utilisateur du contexte fonctionne.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test(expected = IllegalAccessException.class)
 	public void testRemoveClient() throws Exception {
 		Ship ship1=new Ship("RM17XY", "Roca Ruby", "Catamaran", "Ponton de Jard Sur Mer");
@@ -30,13 +33,19 @@ public class CentralContextTest {
 		contexte.removeUser(ID);
 		contexte.getUser(user1.getId());
 	}
-
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer qu'une tentative d'accès à un client non référencé renvoie une erreur.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test(expected = IllegalAccessException.class)
 	public void testGetClient() throws Exception {
 		CentralContext contexte = new CentralContext();
 		contexte.getUser("Remi Bontaz0");
 	}
-
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer que l'ajout d'un client s'effectue correctement.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test
 	public void testAddClient() throws Exception {
 		Ship ship1 = new Ship("RM17XY", "Roca Ruby", "Catamaran", "Ponton de Jard Sur Mer");
@@ -47,13 +56,19 @@ public class CentralContextTest {
 		contexte.addUser(user1.getId(), user1);
 		assertEquals(contexte.getUser(user1.getId()).getNom(),"Bedlin Simon");
 	}
-
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer qu'une tentative d'accès à un bateau non référencé renvoie une erreur.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test(expected = IllegalAccessException.class)
 	public void testGetBoat() throws Exception {
 		CentralContext contexte = new CentralContext();
 		contexte.getShip("RM17XY");
 	}
-
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer que l'ajout d'un bateau fonctionne.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test
 	public void testAddBoat() throws Exception {
 		CentralContext contexte = new CentralContext();

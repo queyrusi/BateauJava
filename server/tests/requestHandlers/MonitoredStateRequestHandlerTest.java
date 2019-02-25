@@ -15,6 +15,10 @@ import server.ConnectionProtocol;
 import server.entities.Ship;
 
 class MonitoredStateRequestHandlerTest {
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer de l'arrêt du gestionnaire de requêtes associé à un bateau lorsque le bateau se déconnecte.
+	 * @author C.Silva, R.Cuinat
+	 */
 	public void EndofThread() {
 		CentralContext context = new CentralContext();
 		Ship ship = new Ship("AZER", "", "", "");
@@ -48,7 +52,10 @@ class MonitoredStateRequestHandlerTest {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer qu'aucun gestionnaire de requêtes n'est instancié lorsque le bateau qui cherche à se connecter n'est pas référencé par le serveur.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test
 	public void UnknownShip() {
 			CentralContext context = new CentralContext();
@@ -78,7 +85,10 @@ class MonitoredStateRequestHandlerTest {
 				e.printStackTrace();
 			}
 	}
-	
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer de la bonne instanciation d'un gestionnaire de requêtes.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test
 	public void StartOfThread() {
 		CentralContext context = new CentralContext();

@@ -5,13 +5,17 @@ public class TrustedContact {
 	private String nom;
 	private String email;
 	private int num_tel;
-	
+	/**
+	 * <strong>Description : </strong> Classe définissant la structure de contact de confiance (demandé aux utilisateurs lors de la création d'un compte).
+	 * @author C.Silva, R.Cuinat
+	 * @return Latitude,longitude.
+	 */
 	public TrustedContact(String nom, String email,int num) {
 		this.nom = nom ;
 		this.email = email;
 		this.num_tel = num;
 	}
-	
+	//getters and setters ...	
 	public synchronized String getNom() {
 		return nom;
 	}

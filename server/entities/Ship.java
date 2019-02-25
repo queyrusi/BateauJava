@@ -14,7 +14,10 @@ public class Ship extends Client {
 	private Position position;
 	private ShipState state;
 	private ArrayList<String> dates_derniers_vols = new ArrayList<String>();
-	
+	/**
+	 * <strong>Description : </strong> Classe héritant de Client et définissant la structure d'un bateau.
+	 * @author C.Silva, R.Cuinat
+	 */
 	public Ship(String immatriculation,String nom,String modele, String type, String station,Position pos) {
 		this.immatriculation=immatriculation;
 		this.nom=nom;
@@ -28,7 +31,7 @@ public class Ship extends Client {
 	public Ship(String immatriculation,String modele, String type, String station) {
 		this(immatriculation,null,modele,type,station,null);
 	}
-
+	//getters and setters ...	
 	public synchronized String getImmatriculation() {
 		return immatriculation;
 	}

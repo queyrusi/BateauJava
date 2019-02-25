@@ -17,7 +17,10 @@ import server.entities.User;
 import server.requestHandlers.UserRequestHandler;
 
 class ConnectionProtocolTest {
-
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer de la bonne identification des codes reçus lors d'une première connection au serveur.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test
 	public void WrongConnectionCode(){
 		assertThrows(IllegalArgumentException.class,()->
@@ -50,7 +53,11 @@ class ConnectionProtocolTest {
 			}
 		});
 	}
-	
+
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer qu'un bateau référencé peut effectivement se connecter au serveur.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test 
 	public void LoggedShip() {
 		CentralContext context = new CentralContext();
@@ -85,7 +92,10 @@ class ConnectionProtocolTest {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * <strong>Description : </strong> Méthode permettant de s'assurer qu'un utilisateur référencé peut effectivement se connecter au serveur.
+	 * @author C.Silva, R.Cuinat
+	 */
 	@Test
 	public void LoggedUser() {
 		CentralContext context = new CentralContext();
