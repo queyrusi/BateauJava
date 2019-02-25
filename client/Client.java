@@ -39,9 +39,12 @@ public abstract class Client extends Observable {
 		try {
 			System.out.println("Tentative : " + nomServeur + " -- " + numeroPort);
 			socketServeur = new Socket( nomServeur, numeroPort);
+			System.out.println("[+]socket serveur ok");
 			socOut = new PrintStream(socketServeur.getOutputStream());
+			System.out.println("[+]socket out ok");
 			socIn = new BufferedReader ( 
 					new InputStreamReader (socketServeur.getInputStream()));
+			System.out.println("[+]socket in ok");
 			ok = true;
 			
 			// initialisation de la connexion :
@@ -50,17 +53,24 @@ public abstract class Client extends Observable {
 			
 		} catch (UnknownHostException e) {
 			System.err.println("Serveur inconnu : " + e);
+			ok = false;
 
 		} catch (ConnectException e) {
 			System.err.println("Exception lors de la connexion:" + e);
 			e.printStackTrace();
+			ok = false;
 
 		} catch (IOException e) {
 			System.err.println("Exception lors de l'echange de donnees:" + e);
+			ok = false;
 			
 		}
-		System.out.println("Connexion faite");
+		
+		if (ok) {
+			System.out.println("[+]connexion faite");
+		}
 		return ok;
+		
 	} 	
 	
 	public void deconnecterDuServeur() {        

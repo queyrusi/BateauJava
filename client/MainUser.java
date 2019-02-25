@@ -14,11 +14,11 @@ public class MainUser {
 	 */
 	public static void main(String[] args) {
 		
-		User newUser = new User("nomServeur", 6666, "toto");
+		User newUser = new User("LAPTOP-D7S9B5VD", 6666, "toto");
 		System.out.println("Done user");
 		
-		//newUser.connecterAuServeur();
-		
+		newUser.connecterAuServeur();
+		while (true) {}
 
 	}
 
