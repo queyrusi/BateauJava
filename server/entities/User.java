@@ -14,11 +14,7 @@ public class User extends Client {
 	private ArrayList<TrustedContact> liste_amis = new ArrayList<TrustedContact>();
 	private ArrayList<String> liste_emails = new ArrayList<String>();
 	private Ship bateau;
-	/**
-	 * <strong>Description : </strong> Classe héritant de Client et définissant la structure d'un utilisateur.
-	 * @author C.Silva, R.Cuinat
-	 * 
-	 */
+	
 	public User(String nom,String adresse,String email,TrustedContact PDC,Ship bateau) {
 		current_Client ++;
 		this.id=nom+Integer.toString(current_Client);
