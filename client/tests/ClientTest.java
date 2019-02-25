@@ -1,6 +1,11 @@
 package client.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import client.Monitoring;
@@ -11,7 +16,14 @@ import client.Tracking;
 import client.User;
 
 class ClientTest {
-
+	
+	@BeforeAll
+	public static void setUpBeforeClass() throws Exception {
+		
+		System.setOut(new PrintStream(new FileOutputStream("ClientTest_log++.txt")));
+		System.out.println("This is test output");
+	}
+	
 	@Test
 	public void clientMethods() {
 		
