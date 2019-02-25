@@ -17,13 +17,6 @@ import client.User;
 
 class ClientTest {
 	
-	@BeforeAll
-	public static void setUpBeforeClass() throws Exception {
-		
-		System.setOut(new PrintStream(new FileOutputStream("ClientTest_log++.txt")));
-		System.out.println("This is test output");
-	}
-	
 	@Test
 	public void clientMethods() {
 		
