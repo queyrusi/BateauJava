@@ -1,2 +1,0 @@
-# BateauJava
-Projet Java TCP
