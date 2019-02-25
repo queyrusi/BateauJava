@@ -16,7 +16,7 @@ public abstract class Client extends Observable {
   
   	private String login;
   
- 	private String typeConnexion
+ 	public String typeConnexion;
 
 	private Socket socketServeur;
 
@@ -29,7 +29,7 @@ public abstract class Client extends Observable {
 		numeroPort = unNumero;
 		nomServeur = unNomServeur;
     		login = unLogin;
-    		typeConnexion = "@AbstractClient"
+    		typeConnexion = "@AbstractClient";
 	} 
 
 	public boolean connecterAuServeur() {        
