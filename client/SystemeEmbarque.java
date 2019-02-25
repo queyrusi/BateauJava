@@ -35,7 +35,10 @@ public class SystemeEmbarque extends Client {
 	 * Constructeur pour le système embarqué
 	 * 
 	 */
-	public SystemeEmbarque(){
+	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin) {
+		
+		super(unNomServeur,unNumero,unLogin);
+		typeConnexion = "@Ship";
 		
 		estSurveille = new Monitoring(this);
 		nonSurveille = new NoMonitoring(this);
@@ -65,6 +68,7 @@ public class SystemeEmbarque extends Client {
 	 * {@code Monitoring}).
 	 * 
 	 * Un exemple d'utilisation dans une classe distante est :
+	 *
 	 * <pre>
 	 * {@code
 	 *  systemeDuBateau.changerEtat(systemeDuBateau.getMonitoringState());

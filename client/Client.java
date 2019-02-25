@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Observable;
 
+@SuppressWarnings("deprecation")
 public abstract class Client extends Observable {
   
 
@@ -25,11 +26,12 @@ public abstract class Client extends Observable {
 	private BufferedReader socIn;	
 	
 	/** Un client se connecte a un serveur identifie par un nom (unNomServeur), sur un port (unNumero), et s'identifie par un login unLogin */
-	public  Client(String unNomServeur, int unNumero, String unLogin) {        
+	public  Client(String unNomServeur, int unNumero, String unLogin) { 
+		
 		numeroPort = unNumero;
 		nomServeur = unNomServeur;
-    		login = unLogin;
-    		typeConnexion = "@AbstractClient";
+    	login = unLogin;
+    	typeConnexion = "@AbstractClient";
 	} 
 
 	public boolean connecterAuServeur() {        
@@ -41,6 +43,11 @@ public abstract class Client extends Observable {
 			socIn = new BufferedReader ( 
 					new InputStreamReader (socketServeur.getInputStream()));
 			ok = true;
+			
+			// initialisation de la connexion :
+			socOut.println(typeConnexion);
+			socOut.println(login);
+			
 		} catch (UnknownHostException e) {
 			System.err.println("Serveur inconnu : " + e);
 
@@ -50,6 +57,7 @@ public abstract class Client extends Observable {
 
 		} catch (IOException e) {
 			System.err.println("Exception lors de l'echange de donnees:" + e);
+			
 		}
 		System.out.println("Connexion faite");
 		return ok;
