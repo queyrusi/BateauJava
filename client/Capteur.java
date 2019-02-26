@@ -5,10 +5,7 @@ package client;
 
 import java.util.Observable;
 
-/**
- * Détecter une cause d'alarme
- * 
- * Collaborateurs :
+/* * Collaborateurs :
  * 
  * +--------------+    +---------------------+
  * |  SystAlarme  |    |   SystemeEmbarque   |
@@ -16,9 +13,12 @@ import java.util.Observable;
  * |              |    |                     |
  * |              |    |                     |
  * +--------------+    +---------------------+
- *
- * # ascii art was generated on asciiflow.com/
  * 
+ */
+
+/**
+ * <strong>Description : </strong> Classe permettant de creer des objets pour détecter une cause d'alarme.
+ *
  * @author chenqun
  *
  */

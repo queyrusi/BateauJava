@@ -4,7 +4,7 @@
 package client;
 
 /**
- * Discute avec le serveur (et peut lui envoyer des messages d'alarme)
+ * <strong>Description : </strong> Discute avec le serveur (et peut lui envoyer des messages d'alarme)
  * 
  * 
  * @author chenqun
@@ -22,7 +22,7 @@ public class SystemeEmbarque extends Client {
 	Etat etatDuSystemeEmbarque;
 	
 	/**
-	 * Constructeur pour le système embarqué
+	 * <strong>Description : </strong> Constructeur pour le système embarqué
 	 * 
 	 */
 	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin) {
@@ -40,7 +40,7 @@ public class SystemeEmbarque extends Client {
 	}
 	
 	/**
-	 * Change l'état du système embarqué
+	 * <strong>Description : </strong> Change l'état du système embarqué
 	 * 
 	 * @param newSystemeEmbarqueState
 	 */
@@ -54,7 +54,7 @@ public class SystemeEmbarque extends Client {
 	// système embarqué => publiques
 	
 	/**
-	 * Retourne l'état {@code estSurveille} du système embarqué ({@code estSurveille} est un état 
+	 * <strong>Description : </strong> Retourne l'état {@code estSurveille} du système embarqué ({@code estSurveille} est un état 
 	 * {@code Monitoring}).
 	 * 
 	 * Un exemple d'utilisation dans une classe distante est :
@@ -75,7 +75,7 @@ public class SystemeEmbarque extends Client {
 	}
 	
 	/**
-	 * Retourne l'état {@code nonSurveille} du système embarqué
+	 * <strong>Description : </strong> Retourne l'état {@code nonSurveille} du système embarqué
 	 * @return
 	 */
 	public Etat getNoMonitoringState() {
@@ -84,7 +84,7 @@ public class SystemeEmbarque extends Client {
 	}
 	
 	/**
-	 * Retourne l'état {@code estVole} du système embarqué
+	 * <strong>Description : </strong> Retourne l'état {@code estVole} du système embarqué
 	 * @return
 	 */
 	public Etat getStolenState() {
@@ -93,7 +93,7 @@ public class SystemeEmbarque extends Client {
 	}
 	
 	/**
-	 * Retourne l'état {@code estTraque} du système embarqué
+	 * <strong>Description : </strong> Retourne l'état {@code estTraque} du système embarqué
 	 * @return
 	 */
 	public Etat getTrackingState() {

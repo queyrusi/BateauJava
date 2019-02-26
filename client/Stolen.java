@@ -3,10 +3,7 @@
  */
 package client;
 
-/**
- * 
- * 
- * +--------------------+
+/* +--------------------+
  * | +----------------+ |              +------------------+
  * | |                | |              |                  |
  * | |  NoMonitoring  | +-------------->    Monitoring    |
@@ -24,7 +21,13 @@ package client;
  *    |               |                 |     ~~~~~~      |
  *    +---------------+                 +-----------------+
  *    
- * # ascii art was generated on asciiflow.com/   
+ * # ascii art was generated on asciiflow.com/ 
+ * 
+ */
+
+/**
+ * <strong>Description : </strong> Etat Stolen pour le bateau
+ *   
  * @author chenqun
  *
  */

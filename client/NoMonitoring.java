@@ -3,10 +3,7 @@
  */
 package client;
 
-/** 
- * 
- * 
- * 
+/*
  * +--------------------+
  * | +----------------+ |              +------------------+
  * | |                | |              |                  |
@@ -24,8 +21,12 @@ package client;
  *    |    Tracking   <-----------------+     Stolen      |
  *    |               |                 |                 |
  *    +---------------+                 +-----------------+
+ */
+
+/** 
+ * <strong>Description : </strong> Etat {@code NoMonitoring} pour le bateau
  * 
- * # ascii art was generated on asciiflow.com/
+ * 
  * @author chenqun
  *
  */
@@ -35,7 +36,7 @@ public class NoMonitoring implements Etat {
 	SystemeEmbarque systemeDuBateau;
 	
 	/**
-	 * Constructeur pour l'état Monitoring
+	 * Constructeur pour l'état {@code NoMonitoring}
 	 * 
 	 * @param newSysEmbarque
 	 */

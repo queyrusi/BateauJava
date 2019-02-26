@@ -3,9 +3,7 @@
  */
 package client;
 
-/**
- * Définit une méthode d'échange 
- * 
+/*
  * Collaborateurs :
  * 
  * +--------------+    +---------------------+
@@ -16,6 +14,10 @@ package client;
  * +--------------+    +---------------------+
  *
  * # ascii art was generated on asciiflow.com/
+ */
+
+/**
+ * <strong>Description : </strong> Définit une méthode d'échange 
  * 
  * @author chenqun
  *
@@ -24,6 +26,10 @@ public interface Etat {
 
 	/**
 	 * Remplaçable par un ToString()...
+	 * 
+	 */
+	
+	/*
 	 * 
 	 */
 	void getStatus();
