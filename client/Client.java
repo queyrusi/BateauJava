@@ -9,12 +9,10 @@ import java.util.Observable;
 
 
 /**
- * Client générique duquel hérite les client User et SystemeEmbarque.
- * 
+ * <strong>Description : </strong> : Client générique duquel hérite les client {@code User} et {@code SystemeEmbarque}.
  * Intègre l'ensemble des methodes qui permettent la gestion de connexion et le transfert d'informations vers un serveur TCP générique.
  *
- *
- *
+ * @author P. Lledo
  */
 
 @SuppressWarnings("deprecation")
@@ -35,7 +33,15 @@ public abstract class Client extends Observable {
 
 	private BufferedReader socIn;	
 	
-	/** Un client se connecte a un serveur identifie par un nom (unNomServeur), sur un port (unNumero), et s'identifie par un login unLogin */
+	/**
+	 * <strong>Description : </strong> Classe {@code Client} de laquelle {@code User} et {@code SystemeEmbarque} devront heriter.
+	 *  Un client se connecte a un serveur identifie par un nom ({@code unNomServeur}), sur un port ({@code unNumero}), 
+	 *  et s'identifie par un login ({@code unLogin}). 
+	 *  
+	 *  @param unNomServeur
+	 *  @param unNumero
+	 *  @param unLogin
+	 */
 	public  Client(String unNomServeur, int unNumero, String unLogin) { 
 		
 		// TODO : vraie abstraction
@@ -44,8 +50,8 @@ public abstract class Client extends Observable {
     	login = unLogin;
     	setTypeConnexion("@AbstractClient");
 	} 
-	/**
-	* Methode de connexion au serveur
+   /**
+	* <strong>Description : </strong>Methode de connexion au serveur
 	*
 	* @return Renvoie true si la connexion a été éffectuée
 	*/
@@ -115,8 +121,8 @@ public abstract class Client extends Observable {
 	}
 	
 	
-	/**
-	* Methode de déconnexion au serveur
+   /**
+	* <strong>Description : </strong>Methode de déconnexion au serveur
 	*/
 	public void deconnecterDuServeur() { 
 		try {
@@ -131,7 +137,7 @@ public abstract class Client extends Observable {
 	} 	
 	
 	/**
-	 * Methode transmettant une chaine de caractères au serveur
+	 * <strong>Description : </strong> Methode transmettant une chaine de caractères au serveur
 	 *
 	 * @param uneChaine Chaine à transmettre au serveur
 	 *
