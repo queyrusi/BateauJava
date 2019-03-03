@@ -21,6 +21,7 @@ public abstract class ShipState {
 	/**
 	 * <strong>Description : </strong>Getter du bateau associé à l'état
 	 * @author C.Silva, R.Cuinat
+	 * @return l'objet bateau associé à l'état
 	 */
 	public Ship getShip() {
 		return ship;

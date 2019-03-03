@@ -8,7 +8,9 @@ public class TrustedContact {
 	/**
 	 * <strong>Description : </strong> Classe définissant la structure de contact de confiance (demandé aux utilisateurs lors de la création d'un compte).
 	 * @author C.Silva, R.Cuinat
-	 * @return Latitude,longitude.
+	 * @param nom nom de la personne de confiance
+	 * @param email email de la personne de confiance
+	 * @param num nuémro de téléphone de la personne de confiance
 	 */
 	public TrustedContact(String nom, String email,int num) {
 		this.nom = nom ;

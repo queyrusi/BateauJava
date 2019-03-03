@@ -1,11 +1,16 @@
 package server.entities;
-
+/**
+ * <strong>Description : </strong> Classe définissant la structure de position GPS d'un bateau.
+ * @author C.Silva, R.Cuinat
+ */
 public class Position {
 	private double latitude;
 	private double longitude;
 	/**
-	 * <strong>Description : </strong> Classe définissant la structure de position GPS d'un bateau.
+	 * <strong>Description : </strong> Constructeur de la classe définissant la structure de position GPS d'un bateau.
 	 * @author C.Silva, R.Cuinat
+	 * @param latitude la latitude en degrés
+	 * @param longitude la longitude en degrés
 	 */
 	public Position(double latitude, double longitude) {
 			this.latitude = latitude;

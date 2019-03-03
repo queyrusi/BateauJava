@@ -14,7 +14,7 @@ import server.requestHandlers.MonitoredStateRequestHandler;
 import server.requestHandlers.UserRequestHandler;
 
 /**
- * <strong>Description : </strong>Classe implémentant {@code}IProtocole. Le thread se charge d'écouter le socket pour valider la connexion d'un utilisateur ou d'un bateau. 
+ * <strong>Description : </strong>Classe implémentant IProtocole. Le thread se charge d'écouter le socket pour valider la connexion d'un utilisateur ou d'un bateau. 
  * Il lance le gestionnaire associé.
  * @author C.Silva, R.Cuinat
  * 

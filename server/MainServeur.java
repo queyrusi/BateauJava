@@ -9,8 +9,8 @@ public class MainServeur {
 	public static void main(String[] args) {
 		CentralContext context = new CentralContext();
 		try {
-			context.addUser("toto", new User("toto", "", "", null, null));
-			context.addShip("tata", new Ship("tata", "", "", ""));
+			context.addUser(new User("toto", "", null, null, null));
+			context.addShip(new Ship("tata", "", "", ""));
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
