@@ -3,6 +3,10 @@
  */
 package client;
 
+//===================
+//TODO 4/2/19 23h03
+//===================
+
 import java.util.Observable;
 
 /* * Collaborateurs :
@@ -23,6 +27,27 @@ import java.util.Observable;
  *
  */
 @SuppressWarnings("deprecation")
-public class Capteur extends Observable {
+public class Capteur extends Observable implements CapteurComposant {
 
+	String capteurName;
+	String capteurLabel;
+	
+	public Capteur(String newCapteurName, String newCapteurLabel) {
+		
+		capteurName = newCapteurName;
+		capteurLabel = newCapteurLabel;
+		
+	}
+	
+	public String getCapteurLabel() {
+		
+		return capteurLabel;
+		
+	}
+	
+	public String getCapteurName() {
+		
+		return capteurName;
+		
+	}
 }
