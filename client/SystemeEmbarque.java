@@ -3,6 +3,10 @@
  */
 package client;
 
+//===================
+//TODO 4/2/19 23h03
+//===================
+
 /**
  * <strong>Description : </strong> Discute avec le serveur (et peut lui envoyer des messages d'alarme)
  * 
@@ -21,11 +25,15 @@ public class SystemeEmbarque extends Client {
 	// état actuel du système embarqué
 	Etat etatDuSystemeEmbarque;
 	
+	// capteurs
+	private CapteurComposant capteurList;  // contient chaque Capteur, CapteurGroupe et tout Capteur sauvegardé dans les CapteurGroupes
+	
+	
 	/**
 	 * <strong>Description : </strong> Constructeur pour le système embarqué
 	 * 
 	 */
-	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin) {
+	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String typeDeCapteur) {
 		
 		super(unNomServeur,unNumero,unLogin);
 		setTypeConnexion("@Ship");
@@ -36,6 +44,13 @@ public class SystemeEmbarque extends Client {
 		estTraque = new Tracking(this);
 		
 		etatDuSystemeEmbarque = nonSurveille;  // état initial du système embarqué
+		
+		setCapteurList(new CapteurGroupe("Ensemble capteurs"));  // capteurs
+		// TODO
+		if (typeDeCapteur == "GPS") {
+			GPS newGPS = new GPS("monGPS", "gps"); 
+			getCapteurList().add(newGPS);
+		}
 		
 	}
 	
@@ -99,6 +114,14 @@ public class SystemeEmbarque extends Client {
 	public Etat getTrackingState() {
 		
 		return estTraque;
+	}
+
+	public CapteurComposant getCapteurList() {
+		return capteurList;
+	}
+
+	public void setCapteurList(CapteurComposant capteurList) {
+		this.capteurList = capteurList;
 	}
 	
 }
