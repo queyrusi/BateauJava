@@ -8,6 +8,8 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import client.CapteurGroupe;
+import client.GPS;
 import client.Monitoring;
 import client.NoMonitoring;
 import client.Stolen;
@@ -31,12 +33,20 @@ class ClientTest {
 	@Test
 	public void sysEmbarqueState() {
 		
-		SystemeEmbarque sysEmbTest = new SystemeEmbarque("nomTest", 6666, "tata");
+		SystemeEmbarque sysEmbTest = new SystemeEmbarque("nomTest", 6666, "tata", "GPS");
 		assertEquals(sysEmbTest.getMonitoringState().getClass(), Monitoring.class);
 		assertEquals(sysEmbTest.getNoMonitoringState().getClass(), NoMonitoring.class);
 		assertEquals(sysEmbTest.getTrackingState().getClass(), Tracking.class);
 		assertEquals(sysEmbTest.getStolenState().getClass(), Stolen.class);
 		
+	}
+	
+	@Test
+	public void capteurComposantDeclaration() {
+		
+		SystemeEmbarque sysEmbTest = new SystemeEmbarque("nomTest", 6666, "tata", "GPS");
+		assertEquals(sysEmbTest.getCapteurList().getClass(), CapteurGroupe.class);
+		assertEquals(sysEmbTest.getCapteurList().getComposant(0).getClass(), GPS.class);
 	}
 
 }
