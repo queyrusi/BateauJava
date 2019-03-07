@@ -3,6 +3,10 @@
  */
 package client;
 
+//==================
+//TODO 7/3/19 09h05
+//==================
+
 /* +--------------------+
  * | +----------------+ |              +------------------+
  * | |                | |              |                  |
@@ -33,8 +37,10 @@ package client;
  */
 public class Stolen implements Etat{
 
+	String stateLabel;
 	
 	SystemeEmbarque systemeDuBateau;
+	
 	
 	/**
 	 * Constructeur pour l'état Stolen
@@ -42,6 +48,8 @@ public class Stolen implements Etat{
 	 * @param newSysEmbarque
 	 */
 	public Stolen(SystemeEmbarque newSysEmbarque){
+		
+		stateLabel = "Stolen";
 		
 		systemeDuBateau = newSysEmbarque;
 		
@@ -58,5 +66,6 @@ public class Stolen implements Etat{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

@@ -3,6 +3,10 @@
  */
 package client;
 
+//==================
+//TODO 7/3/19 09h05
+//==================
+
 /*
  * +--------------------+
  * | +----------------+ |              +------------------+
@@ -32,6 +36,7 @@ package client;
  */
 public class NoMonitoring implements Etat {
 
+	String stateLabel;
 	
 	SystemeEmbarque systemeDuBateau;
 	
@@ -41,6 +46,8 @@ public class NoMonitoring implements Etat {
 	 * @param newSysEmbarque
 	 */
 	public NoMonitoring(SystemeEmbarque newSysEmbarque){
+		
+		stateLabel = "NoMonitoring";
 		
 		systemeDuBateau = newSysEmbarque;
 		

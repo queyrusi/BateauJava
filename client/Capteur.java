@@ -3,9 +3,12 @@
  */
 package client;
 
-//===================
-//TODO 4/2/19 23h03
-//===================
+import java.util.ArrayList;
+import java.util.List;
+
+//==================
+//TODO 7/3/19 09h05
+//==================
 
 import java.util.Observable;
 
@@ -29,14 +32,26 @@ import java.util.Observable;
 @SuppressWarnings("deprecation")
 public class Capteur extends Observable implements CapteurComposant {
 
-	String capteurName;
+	// liste des observeurs (abonnés) pour notify
+	private List<SystAlarme> systAlarmeList = new ArrayList<>();  // TODO
+	
 	String capteurLabel;
 	
-	public Capteur(String newCapteurName, String newCapteurLabel) {
+	int capteurValue;
+	
+	
+	public Capteur(String newCapteurLabel, int newCapteurValue, SystAlarme newSystAlarme) {
 		
-		capteurName = newCapteurName;
-		capteurLabel = newCapteurLabel;
+		capteurValue = newCapteurValue;  // 125.912 par exemple
+		capteurLabel = newCapteurLabel;  // gps1
 		
+		addObserverPerso(newSystAlarme);
+	}
+	
+	private void addObserverPerso(SystAlarme newSystAlarme) {
+
+		addObserver(newSystAlarme);
+		this.systAlarmeList.add(newSystAlarme); // TODO
 	}
 	
 	public String getCapteurLabel() {
@@ -45,9 +60,19 @@ public class Capteur extends Observable implements CapteurComposant {
 		
 	}
 	
-	public String getCapteurName() {
+	public int getCapteurValue() {
 		
-		return capteurName;
+		return capteurValue;
 		
+	}
+	
+	public void warning() {
+		
+		System.out.println("[+] Capteur warning");
+		System.out.println(this.systAlarmeList.get(0));
+		String messageAlerte = "alarme " + this.capteurLabel;
+		setChanged(); 
+		notifyObservers(messageAlerte);
+
 	}
 }

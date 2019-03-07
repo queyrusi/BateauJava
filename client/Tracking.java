@@ -3,6 +3,10 @@
  */
 package client;
 
+//==================
+//TODO 7/3/19 09h05
+//==================
+
 /* +--------------------+
  * | +----------------+ |              +------------------+
  * | |                | |              |                  |
@@ -33,6 +37,8 @@ package client;
  */
 public class Tracking implements Etat {
 
+	String stateLabel;
+	
 	SystemeEmbarque systemeDuBateau;
 	
 	/**
@@ -41,6 +47,8 @@ public class Tracking implements Etat {
 	 * @param newSysEmbarque
 	 */
 	public Tracking(SystemeEmbarque newSysEmbarque){
+		
+		stateLabel = "Tracking";
 		
 		systemeDuBateau = newSysEmbarque;
 		

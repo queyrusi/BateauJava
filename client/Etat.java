@@ -23,6 +23,9 @@ package client;
  *
  */
 public interface Etat {
+	
+
+	String stateLabel = null;
 
 	/**
 	 * Remplaçable par un ToString()...
@@ -33,5 +36,10 @@ public interface Etat {
 	 * 
 	 */
 	void getStatus();
+	
+	default String getStateLabel() {
+		
+		return this.stateLabel;
+	}
 	
 }
