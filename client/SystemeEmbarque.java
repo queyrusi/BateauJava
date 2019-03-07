@@ -54,7 +54,7 @@ public class SystemeEmbarque extends Client implements Observer {
 		etatDuSystemeEmbarque = nonSurveille; // état initial du système embarqué
 
 		systAlarme = new SystAlarme(this);
-		
+		// /!\ /!\ Je crois qu'il y a quelques soucis ici
 		capteurList = new CapteurGroupe("Ensemble capteurs");
 
 		setCapteurList(capteurList); // capteurs
@@ -62,6 +62,7 @@ public class SystemeEmbarque extends Client implements Observer {
 		if (typeDeCapteur == "GPS") {
 			GPS newGPS = new GPS("gps", 0, this.systAlarme);
 			getCapteurList().add(newGPS);
+		//Jusque là /!\ /!\
 		}
 
 	}
