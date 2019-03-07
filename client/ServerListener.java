@@ -65,8 +65,8 @@ public class ServerListener implements Runnable {
 					sensorNumbers=receivedLine.length()-1;
 					if (receivedLine[0].equals("@req")) {
 						for(int i=1;i<=sensorNumber;i++){
-						  	value=this.listeningSystemeEmbarque.requestSensor(receivedLine[i])
-							this.listeningSystemeEmbarque.
+						  	value=this.listeningSystemeEmbarque.requestSensor(receivedLine[i]);
+							this.listeningSystemeEmbarque.transmettreChaine(value);
 						}
 					  }
 				} catch (IOException e) {
