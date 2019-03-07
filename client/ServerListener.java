@@ -19,6 +19,7 @@ public class ServerListener implements Runnable {
 	SystemeEmbarque listeningSystemeEmbarque;
 	
 	BufferedReader socIn;
+	
 
 	/**
 	 * 
@@ -32,6 +33,9 @@ public class ServerListener implements Runnable {
 
 	@Override
 	public void run() {
+		String[] receivedLine;
+		String value;
+		int sensorNumbers;
 		// TODO Auto-generated method stub
 		while (true) {
 			
@@ -57,9 +61,13 @@ public class ServerListener implements Runnable {
 			  case "Monitoring":
 				
 				  try {
-					if (this.socIn.readLine().equals("@req")) {
-						  
-						  // TODO gestion de l'envoi des données capteur
+					receivedLine=this.socIn.readLine().split(" ");
+					sensorNumbers=receivedLine.length()-1;
+					if (receivedLine[0].equals("@req")) {
+						for(int i=1;i<=sensorNumber;i++){
+						  	value=this.listeningSystemeEmbarque.requestSensor(receivedLine[i])
+							this.listeningSystemeEmbarque.
+						}
 					  }
 				} catch (IOException e) {
 					
