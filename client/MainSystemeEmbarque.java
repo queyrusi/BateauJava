@@ -28,7 +28,7 @@ public class MainSystemeEmbarque {
 		// l'état peut passer en Monitoring une fois la connection établie
 		newSys.changerEtat(newSys.getMonitoringState());
 		
-		System.out.println(newSys.etatDuSystemeEmbarque);
+		System.out.println(newSys.currentState);
 		
 		((Capteur) newSys.getCapteurList().getComposant(0)).warning();  // lance l'alarme 
 		

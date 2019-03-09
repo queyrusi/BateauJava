@@ -43,7 +43,7 @@ public class RequestHandler implements Runnable {
 		while (this.listeningSystemeEmbarque.handling) {
 			
 			// switch sur l'état actuel du système embarqué :
-			switch(this.listeningSystemeEmbarque.etatDuSystemeEmbarque.getStateLabel()) { 
+			switch(this.listeningSystemeEmbarque.currentState.getStateLabel()) { 
 
 			  case "Stolen":
 				  

@@ -4,6 +4,8 @@
 package client;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.lang.Math.*;
 
 //===================
 //TODO 6/3/19 15h45
@@ -15,7 +17,7 @@ import java.util.Random;
  */
 public class GPS extends Capteur {
 	
-	private float r=6371.009;
+	private float r = (float) 6371.009;
 	
 	// Distance d'alerte du capteur. Attention en km
 	private float dist;
@@ -33,8 +35,9 @@ public class GPS extends Capteur {
 	 */
 	public GPS(String newCapteurLabel, SystAlarme newSystAlarme) {
 		super(newCapteurLabel, newSystAlarme);
-		latitude=generateCoordinateNorth();
-		longitude=generatecoordinateEast();
+		latitude= 1; // TODO
+		longitude=1; // TODO
+		dist = 7;
 		// TODO pas le bon argument
 		
 	}
@@ -50,6 +53,10 @@ public class GPS extends Capteur {
 		return (360 * randomizer.nextFloat() - 180);
 	}
 	
+	public void distanceDevientAberrante() {
+		latitude += 100;
+	}
+	
 	@Override
 	public void start() {
 		// Longitude et latitude temporaires
@@ -58,23 +65,25 @@ public class GPS extends Capteur {
 		float x;
 		float y;
 		float z;
-		float d;
-		while(true){
-			tempLat=generateCoordinateNorth();
-			tempLong=generatecoordinateEast();
-			x=(cos(latitude)*cos(longitude)-cos(tempLat)*cos(tempLong))**2
-			y=(cos(latitude)*sin(longitude)-cos(tempLat)*sin(tempLong))**2
-			z=(sin(latitude)-sin(tempLat))**2;
-			d=r*sqrt((x+y+z));
-			if (d>=dist){
-				warning();
+		float d = 0;
+//		while(true){
+//			tempLat = generateCoordinateNorth();
+//			tempLong = generateCoordinateEast();
+//			x = (float) Math.pow( Math.cos(latitude)*Math.cos(longitude) - Math.cos(tempLat) * Math.cos(tempLong), 2.0);
+//			y = (float) Math.pow( Math.cos(latitude)*Math.sin(longitude) - Math.cos(tempLat) * Math.sin(tempLong), 2.0);
+//			z = (float) Math.pow((Math.sin(latitude) - Math.sin(tempLat)), 2);
+//			d = (float) (r * Math.sqrt((x + y + z)));
+//		if (d>=dist){}
+		while (d <= dist) {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			latitude=tempLat;
-			longitude=tempLong;
+			d += 1;
 		}
-			
-		
-		
+		warning();
 	}
 
 	@Override

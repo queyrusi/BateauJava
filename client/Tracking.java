@@ -80,7 +80,7 @@ public class Tracking implements Etat {
 	 */
 	public void envoiPeriodique () {
 		
-		while (systemeDuBateau.etatDuSystemeEmbarque == systemeDuBateau.getTrackingState()) {
+		while (systemeDuBateau.currentState == systemeDuBateau.getTrackingState()) {
 			
 			String chaine = systemeDuBateau.requestSensor("gps").getCapteurValueString();
 			systemeDuBateau.transmettreChaine(chaine);

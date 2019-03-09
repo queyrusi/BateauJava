@@ -30,7 +30,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	Etat estTraque;
 
 	// état actuel du système embarqué
-	Etat etatDuSystemeEmbarque;
+	Etat currentState;
 
 	// capteurs
 	CapteurComposant capteurList; // contient chaque Capteur, CapteurGroupe et tout Capteur sauvegardé dans les
@@ -68,7 +68,7 @@ public class SystemeEmbarque extends Client implements Observer {
 		estVole = new Stolen(this);
 		estTraque = new Tracking(this);
 
-		etatDuSystemeEmbarque = nonSurveille; // état initial du système embarqué
+		currentState = nonSurveille; // état initial du système embarqué
 
 		systAlarme = new SystAlarme(this);
 
@@ -78,23 +78,37 @@ public class SystemeEmbarque extends Client implements Observer {
 		String[] Ensemble = EnsembleDesCapteurs.split(";");
 		int k = 0;
 		String typeDeCapteur = Ensemble[k];
-		while (!typeDeCapteur.equals(null)) { // ajouter un à un les capteurs décrits par le string EnsembleDesCapteurs
+		
+		// tnat qu'il y a ds capteurs a ajouter
+		while (!typeDeCapteur.equals(null)) { //ajouter un à un les capteurs décrits par le string EnsembleDesCapteurs
 
-			switch (typeDeCapteur) {
-
-			case "GPS":
+			// 
+			while(k < Ensemble.length) {
 				
-				GPS newGPS = new GPS("gps", this.systAlarme);
-				getCapteurList().add(newGPS);
-				break;
+				typeDeCapteur = Ensemble[k];
+				
+				switch (typeDeCapteur) {
+	
+				case "GPS":
+					
+					GPS newGPS = new GPS("gps", this.systAlarme);
+					getCapteurList().add(newGPS);
+					break;
+				}
+				k++;  // on passe au capteur suivant
 			}
-			k++;
-			typeDeCapteur = Ensemble[k];
 		}
 		
 		requestHandler = new RequestHandler(this);
 		requestHandlerThread = new Thread(requestHandlerThread);
 
+	}
+
+	/**
+	 * @return 
+	 */
+	public Etat getCurrentState() {
+		return currentState;
 	}
 
 	/**
@@ -104,9 +118,9 @@ public class SystemeEmbarque extends Client implements Observer {
 	 */
 	void changerEtat(Etat newSystemeEmbarqueState) {
 
-		etatDuSystemeEmbarque.onExit();
-		etatDuSystemeEmbarque = newSystemeEmbarqueState;
-		etatDuSystemeEmbarque.onEntry();
+		currentState.onExit();
+		currentState = newSystemeEmbarqueState;
+		currentState.onEntry();
 
 	}
 
