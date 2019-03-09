@@ -47,6 +47,7 @@ public interface Etat {
 	}
 	
 	default void onEntry(){};
+	
 	default void onExit(){};
 	
 }

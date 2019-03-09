@@ -24,19 +24,22 @@ public class RequestHandler implements Runnable {
 	/**
 	 * 
 	 */
-	public RequestHandler(BufferedReader newsocIn, SystemeEmbarque newSystemeEmbarque) {
+	public RequestHandler(SystemeEmbarque newSystemeEmbarque) {
 		
 		listeningSystemeEmbarque = newSystemeEmbarque;
-		socIn = newsocIn;
+		socIn = newSystemeEmbarque.getSocIn();
 		
 	}
 
 	@Override
 	public void run() {
+		
 		String[] receivedLine;
-		String value;
+		
+		String value = null;
+		
 		int sensorNumbers;
-		// TODO Auto-generated method stub
+		
 		while (this.listeningSystemeEmbarque.handling) {
 			
 			// switch sur l'état actuel du système embarqué :
@@ -61,15 +64,35 @@ public class RequestHandler implements Runnable {
 			  case "Monitoring":
 				
 				  try {
-					receivedLine=this.socIn.readLine().split(" ");
-					sensorNumbers=receivedLine.length()-1;
-					if (receivedLine[0].equals("@req")) {
-						for(int i=1;i<=sensorNumber;i++){
-						  	value+=this.listeningSystemeEmbarque.requestSensor(receivedLine[i]).getCapteurValueString();
-							value+=" ";
+					receivedLine = this.socIn.readLine().split(" ");  // split la ligne pour savoir si c'est une requete...
+					
+					sensorNumbers=receivedLine.length-1;
+					
+					if (receivedLine[0].equals("@req")) {  // si c'est une requete :
+						
+						// cas "all" : on demande tous les capteurs :
+						if (receivedLine[1].equals("all")) {
+							
+							// on parcourt la liste de tous les composants du système embarqué
+							for (CapteurComposant capteur : ((CapteurGroupe)listeningSystemeEmbarque.capteurList).getcapteurComposants()) {
+								
+								value += capteur.getCapteurLabel() + " ";
+								value += capteur.getCapteurValueString() + " ";
+								
+								}
+						}
+						
+						// cas non-"all" ; requete capteur par capteur :
+						else {
+							for (int i = 1; i <= sensorNumbers; i++) { 
+								
+								// valeur de chacun des capteurs demandé :
+							  	value += this.listeningSystemeEmbarque.requestSensor(receivedLine[i]).getCapteurValueString();  
+								value += " ";
+							}
 						}
 						this.listeningSystemeEmbarque.transmettreChaine(value);
-					  }
+					}
 				} catch (IOException e) {
 					
 					e.printStackTrace();

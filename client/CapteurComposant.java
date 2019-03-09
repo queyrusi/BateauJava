@@ -36,5 +36,7 @@ public interface CapteurComposant {
 	// DISPLAY INFO
 	// ============
 	public default void displayCapteurInfo() {}
+
+	public String getCapteurValueString();
 	
 }

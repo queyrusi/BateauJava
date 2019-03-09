@@ -57,12 +57,23 @@ public class NoMonitoring implements Etat {
 		return systemeDuBateau;
 	}
 	
-	@Override
+	@Override  // TODO obsolete
 	public void getStatus() {
 		
 		System.out.println("Je ne suis pas sous surveillance !");
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void start() {
+		
+		while (!systemeDuBateau.connecterAuServeur()) {
+			
+			System.out.println("[+] en attente de connexion...");
+			
+		}
+		
+		// connexion établie, on passe en état Monitoring :
+		systemeDuBateau.changerEtat(systemeDuBateau.getMonitoringState());
+	}
 }

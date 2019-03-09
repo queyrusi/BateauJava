@@ -64,9 +64,14 @@ public class Monitoring implements Etat {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * <strong> Description </strong>: méthode exécutée en entrée de Monitoring
+	 */
 	@Override
 	public void onEntry(){
-		this.systemeDuBateau.handling = true;
 		
+		this.systemeDuBateau.handling = true;
+		systemeDuBateau.requestHandlerThread.start();
 	}
 }

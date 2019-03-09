@@ -5,9 +5,10 @@ package client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.*;
 
 //==================
-//TODO 7/3/19 09h05
+//TODO 9/3/19 10h47
 //==================
 
 import java.util.Observable;
@@ -30,22 +31,20 @@ import java.util.Observable;
  *
  */
 @SuppressWarnings("deprecation")
-public class Capteur extends Observable implements CapteurComposant {
+public abstract class Capteur extends Observable implements CapteurComposant {
 
 	// liste des observeurs (abonnés) pour notify
 	private List<SystAlarme> systAlarmeList = new ArrayList<>();  // TODO
 	
 	String capteurLabel;
 	
-	int capteurValue;
 	
-	
-	public Capteur(String newCapteurLabel, int newCapteurValue, SystAlarme newSystAlarme) {
+	public Capteur(String newCapteurLabel, SystAlarme newSystAlarme) {
 		
-		capteurValue = newCapteurValue;  // 125.912 par exemple
 		capteurLabel = newCapteurLabel;  // gps1
 		
 		addObserverPerso(newSystAlarme);
+		
 	}
 	
 	private void addObserverPerso(SystAlarme newSystAlarme) {
@@ -60,17 +59,7 @@ public class Capteur extends Observable implements CapteurComposant {
 		
 	}
 	
-	public int getCapteurValue() {
-		
-		return capteurValue;
-		
-	}
-	
-public String getCapteurValueString() {
-		
-		return capteurValue.toString();
-		
-	}
+	public abstract String getCapteurValueString();
 	
 	public void warning() {
 		
@@ -81,4 +70,6 @@ public String getCapteurValueString() {
 		notifyObservers(messageAlerte);
 
 	}
+	
+	public abstract void start();
 }

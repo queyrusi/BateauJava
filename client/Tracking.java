@@ -3,6 +3,7 @@
  */
 package client;
 
+import java.util.concurrent.*;
 //==================
 //TODO 9/3/19 10h27
 //==================
@@ -55,6 +56,7 @@ public class Tracking implements Etat {
 	}
 	
 	public SystemeEmbarque getSystemeDuBateau() {
+		
 		return systemeDuBateau;
 	}
 	
@@ -66,8 +68,29 @@ public class Tracking implements Etat {
 		
 	}
 	@Override
-	public void onEntry(){
-		this.systemeDuBateau.handling = true;
+	public void onEntry() {
+		
+		envoiPeriodique(); // on commence l'envoit periodique
+		this.systemeDuBateau.handling = false;
+	}
+	
+	/**
+	 * <strong>Description : </strong> Lance l'envoi périodique de la position du bateau au serveur
+	 * 
+	 */
+	public void envoiPeriodique () {
+		
+		while (systemeDuBateau.etatDuSystemeEmbarque == systemeDuBateau.getTrackingState()) {
+			
+			String chaine = systemeDuBateau.requestSensor("gps").getCapteurValueString();
+			systemeDuBateau.transmettreChaine(chaine);
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

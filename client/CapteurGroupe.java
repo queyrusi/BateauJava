@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 // ===================
-// TODO 4/2/19 23h03
+// TODO 9/3/19 11h22
 // ===================
 
 
@@ -69,6 +69,17 @@ public class CapteurGroupe implements CapteurComposant {
 	}
 
 	public String getCapteurLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public ArrayList<CapteurComposant> getcapteurComposants() {
+		
+		return capteurComposants;
+	}
+
+	@Override
+	public String getCapteurValueString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

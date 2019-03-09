@@ -3,8 +3,10 @@
  */
 package client;
 
+import java.io.BufferedReader;
 import java.util.Observable;
 import java.util.Observer;
+
 
 //==================
 //TODO 9/3/19 10h22
@@ -28,26 +30,38 @@ public class SystemeEmbarque extends Client implements Observer {
 	Etat estTraque;
 
 	// état actuel du système embarqué
-	protected Etat etatDuSystemeEmbarque;
+	Etat etatDuSystemeEmbarque;
 
 	// capteurs
 	CapteurComposant capteurList; // contient chaque Capteur, CapteurGroupe et tout Capteur sauvegardé dans les
 									// CapteurGroupes
-	
+
 	// variable d'activation du requestHandler
 	boolean handling;
-	
+
 	// le système d'alarme
 	SystAlarme systAlarme;
+	
+	// Runnable en paramètre du thread pour gérer les requêtes
+	RequestHandler requestHandler;
+	
+	// Thread à executer une fois en Monitoring
+	Thread requestHandlerThread;
+	
+	// SocIn qui prendra une valeur une fois la connexion établie
+	private BufferedReader socIn;
 
 	/**
 	 * <strong>Description : </strong> Constructeur pour le système embarqué
 	 * 
+	 * <strong>Exemple : </strong> SystemeEmbarque("monServeur", "newLogin",
+	 * "gps;thermometre")
+	 * 
 	 */
-	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String EnsembleDesCapteur) {
+	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String EnsembleDesCapteurs) {
 
 		super(unNomServeur, unNumero, unLogin);
-		setTypeConnexion("@Ship");
+		setTypeConnexion(" @Ship");
 
 		estSurveille = new Monitoring(this);
 		nonSurveille = new NoMonitoring(this);
@@ -57,22 +71,29 @@ public class SystemeEmbarque extends Client implements Observer {
 		etatDuSystemeEmbarque = nonSurveille; // état initial du système embarqué
 
 		systAlarme = new SystAlarme(this);
-		// /!\ /!\ Je crois qu'il y a quelques soucis ici
+
 		capteurList = new CapteurGroupe("Ensemble capteurs");
+
 		// TODO il y a plusieurs capteurs a ajouter
 		String[] Ensemble = EnsembleDesCapteurs.split(";");
-		int k=0;
+		int k = 0;
 		String typeDeCapteur = Ensemble[k];
-		while(!typeDeCapteur.equals(null)){
-			switch(typeDeCapteur) {
+		while (!typeDeCapteur.equals(null)) { // ajouter un à un les capteurs décrits par le string EnsembleDesCapteurs
+
+			switch (typeDeCapteur) {
+
 			case "GPS":
-				GPS newGPS = new GPS("gps", 0, this.systAlarme);
+				
+				GPS newGPS = new GPS("gps", this.systAlarme);
 				getCapteurList().add(newGPS);
 				break;
 			}
 			k++;
-			String typeDeCapteur = Ensemble[k];
+			typeDeCapteur = Ensemble[k];
 		}
+		
+		requestHandler = new RequestHandler(this);
+		requestHandlerThread = new Thread(requestHandlerThread);
 
 	}
 
@@ -83,7 +104,9 @@ public class SystemeEmbarque extends Client implements Observer {
 	 */
 	void changerEtat(Etat newSystemeEmbarqueState) {
 
+		etatDuSystemeEmbarque.onExit();
 		etatDuSystemeEmbarque = newSystemeEmbarqueState;
+		etatDuSystemeEmbarque.onEntry();
 
 	}
 
@@ -153,10 +176,18 @@ public class SystemeEmbarque extends Client implements Observer {
 
 		this.capteurList = capteurList;
 	}
-	
-	public Capteur requestSensor(String sensor){
-		Capteur capteur = Capteur.stream().filter(Capteur -> sensor.equals(Capteur.getCapteurLabel())).findAny().orElse(null);
-		return capteur
+
+	public CapteurComposant requestSensor(String sensor){
+		
+		for (CapteurComposant capteur : ((CapteurGroupe)capteurList).getcapteurComposants()) {
+			
+			if(capteur.getCapteurLabel().equals(sensor)) {
+				
+				return capteur;
+			}
+			
+		}
+		return null;
 	}
 
 	@Override
@@ -167,6 +198,14 @@ public class SystemeEmbarque extends Client implements Observer {
 		this.changerEtat(this.estVole);
 		System.out.println("[+] Je suis passe en Stolen");
 
+	}
+
+	public BufferedReader getSocIn() {
+		return socIn;
+	}
+
+	public void setSocIn(BufferedReader socIn) {
+		this.socIn = socIn;
 	}
 
 }

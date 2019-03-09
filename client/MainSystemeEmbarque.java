@@ -30,7 +30,7 @@ public class MainSystemeEmbarque {
 		
 		System.out.println(newSys.etatDuSystemeEmbarque);
 		
-		((Capteur) newSys.getCapteurList().getComposant(0)).warning();
+		((Capteur) newSys.getCapteurList().getComposant(0)).warning();  // lance l'alarme 
 		
 		
 //	    new Thread("mettre ici un runnable").start();
