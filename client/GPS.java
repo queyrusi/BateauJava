@@ -6,7 +6,7 @@ package client;
 import java.util.Random;
 
 //===================
-//TODO 6/3/19 18h23
+//TODO 6/3/19 15h45
 //===================
 
 /**
@@ -14,6 +14,11 @@ import java.util.Random;
  *
  */
 public class GPS extends Capteur {
+	
+	private float r=6371.009;
+	
+	// Distance d'alerte du capteur. Attention en km
+	private float dist;
 	
 	Random randomizer;
 	
@@ -28,6 +33,8 @@ public class GPS extends Capteur {
 	 */
 	public GPS(String newCapteurLabel, SystAlarme newSystAlarme) {
 		super(newCapteurLabel, newSystAlarme);
+		latitude=generateCoordinateNorth();
+		longitude=generatecoordinateEast();
 		// TODO pas le bon argument
 		
 	}
@@ -45,7 +52,27 @@ public class GPS extends Capteur {
 	
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
+		// Longitude et latitude temporaires
+		float tempLat;
+		float tempLong;
+		float x;
+		float y;
+		float z;
+		float d;
+		while(true){
+			tempLat=generateCoordinateNorth();
+			tempLong=generatecoordinateEast();
+			x=(cos(latitude)*cos(longitude)-cos(tempLat)*cos(tempLong))**2
+			y=(cos(latitude)*sin(longitude)-cos(tempLat)*sin(tempLong))**2
+			z=(sin(latitude)-sin(tempLat))**2;
+			d=r*sqrt((x+y+z));
+			if (d>=dist){
+				warning();
+			}
+			latitude=tempLat;
+			longitude=tempLong;
+		}
+			
 		
 		
 	}
