@@ -20,6 +20,6 @@ public class GPS extends Capteur {
 	public GPS(String newCapteurLabel, int newCapteurValue, SystAlarme newSystAlarme) {
 		super(newCapteurLabel, newCapteurValue, newSystAlarme);
 		// TODO pas le bon argument
-	}
+	} 
 
 }

@@ -66,6 +66,12 @@ public class Capteur extends Observable implements CapteurComposant {
 		
 	}
 	
+public String getCapteurValueString() {
+		
+		return capteurValue.toString();
+		
+	}
+	
 	public void warning() {
 		
 		System.out.println("[+] Capteur warning");

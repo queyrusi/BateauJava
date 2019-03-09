@@ -3,6 +3,10 @@
  */
 package client;
 
+//==================
+//TODO 9/3/19 10h27
+//==================
+
 /*
  * Collaborateurs :
  * 
@@ -41,5 +45,8 @@ public interface Etat {
 		
 		return this.stateLabel;
 	}
+	
+	default void onEntry(){};
+	default void onExit(){};
 	
 }

@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 //==================
-//TODO 7/3/19 09h05
+//TODO 9/3/19 10h22
 //==================
 
 /**
@@ -33,7 +33,10 @@ public class SystemeEmbarque extends Client implements Observer {
 	// capteurs
 	CapteurComposant capteurList; // contient chaque Capteur, CapteurGroupe et tout Capteur sauvegardé dans les
 									// CapteurGroupes
-
+	
+	// variable d'activation du requestHandler
+	boolean handling;
+	
 	// le système d'alarme
 	SystAlarme systAlarme;
 
@@ -41,7 +44,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * <strong>Description : </strong> Constructeur pour le système embarqué
 	 * 
 	 */
-	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String typeDeCapteur) {
+	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String EnsembleDesCapteur) {
 
 		super(unNomServeur, unNumero, unLogin);
 		setTypeConnexion("@Ship");
@@ -56,13 +59,19 @@ public class SystemeEmbarque extends Client implements Observer {
 		systAlarme = new SystAlarme(this);
 		// /!\ /!\ Je crois qu'il y a quelques soucis ici
 		capteurList = new CapteurGroupe("Ensemble capteurs");
-
-		setCapteurList(capteurList); // capteurs
 		// TODO il y a plusieurs capteurs a ajouter
-		if (typeDeCapteur == "GPS") {
-			GPS newGPS = new GPS("gps", 0, this.systAlarme);
-			getCapteurList().add(newGPS);
-		//Jusque là /!\ /!\
+		String[] Ensemble = EnsembleDesCapteurs.split(";");
+		int k=0;
+		String typeDeCapteur = Ensemble[k];
+		while(!typeDeCapteur.equals(null)){
+			switch(typeDeCapteur) {
+			case "GPS":
+				GPS newGPS = new GPS("gps", 0, this.systAlarme);
+				getCapteurList().add(newGPS);
+				break;
+			}
+			k++;
+			String typeDeCapteur = Ensemble[k];
 		}
 
 	}
@@ -143,6 +152,11 @@ public class SystemeEmbarque extends Client implements Observer {
 	public void setCapteurList(CapteurComposant capteurList) {
 
 		this.capteurList = capteurList;
+	}
+	
+	public Capteur requestSensor(String sensor){
+		Capteur capteur = Capteur.stream().filter(Capteur -> sensor.equals(Capteur.getCapteurLabel())).findAny().orElse(null);
+		return capteur
 	}
 
 	@Override

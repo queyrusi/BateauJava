@@ -4,7 +4,7 @@
 package client;
 
 //==================
-//TODO 7/3/19 09h05
+//TODO 9/3/19 10h27
 //==================
 
 /* +--------------------+
@@ -64,6 +64,10 @@ public class Tracking implements Etat {
 		System.out.println("Je me fait traquer !");
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void onEntry(){
+		this.systemeDuBateau.handling = true;
 	}
 
 }
