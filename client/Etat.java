@@ -30,16 +30,6 @@ public interface Etat {
 	
 
 	String stateLabel = null;
-
-	/**
-	 * Remplaçable par un ToString()...
-	 * 
-	 */
-	
-	/*
-	 * 
-	 */
-	void getStatus();
 	
 	default String getStateLabel() {
 		

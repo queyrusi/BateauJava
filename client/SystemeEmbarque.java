@@ -9,7 +9,7 @@ import java.util.Observer;
 
 
 //==================
-//TODO 9/3/19 10h22
+//TODO 9/3/19 23h22
 //==================
 
 /**
@@ -17,7 +17,8 @@ import java.util.Observer;
  * des messages d'alarme)
  * 
  * 
- * @author chenqun
+ * @author P. Lledo, S. Queyrut
+ * 
  *
  */
 @SuppressWarnings("deprecation")
@@ -80,23 +81,20 @@ public class SystemeEmbarque extends Client implements Observer {
 		String typeDeCapteur = Ensemble[k];
 		
 		// tnat qu'il y a ds capteurs a ajouter
-		while (!typeDeCapteur.equals(null)) { //ajouter un à un les capteurs décrits par le string EnsembleDesCapteurs
+		while (!typeDeCapteur.equals(null) & k < Ensemble.length)  { //ajouter un à un les capteurs décrits par le string EnsembleDesCapteurs
+				
+			typeDeCapteur = Ensemble[k];
+			
+			switch (typeDeCapteur) {
 
-			// 
-			while(k < Ensemble.length) {
+			case "GPS":
 				
-				typeDeCapteur = Ensemble[k];
-				
-				switch (typeDeCapteur) {
-	
-				case "GPS":
-					
-					GPS newGPS = new GPS("gps", this.systAlarme);
-					getCapteurList().add(newGPS);
-					break;
-				}
-				k++;  // on passe au capteur suivant
-			}
+				GPS newGPS = new GPS("gps", this.systAlarme);
+				getCapteurList().add(newGPS);
+				break;
+			}	
+			k++;  // on passe au capteur suivant
+
 		}
 		
 		requestHandler = new RequestHandler(this);
@@ -105,27 +103,28 @@ public class SystemeEmbarque extends Client implements Observer {
 	}
 
 	/**
-	 * @return 
+	 * <strong>Description : </strong>Retourne l'état courant du système embarqué.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return l'état courant du système embarqué.
 	 */
 	public Etat getCurrentState() {
 		return currentState;
 	}
 
 	/**
-	 * <strong>Description : </strong> Change l'état du système embarqué
+	 * <strong>Description : </strong> Change l'état du système embarqué.
 	 * 
-	 * @param newSystemeEmbarqueState
+	 * @param newSystemeEmbarqueState - état dans lequel on veut mettre le système embarqué.
+	 * @author P. Lledo, S. Queyrut
 	 */
-	void changerEtat(Etat newSystemeEmbarqueState) {
+	public void changerEtat(Etat newSystemeEmbarqueState) {
 
 		currentState.onExit();
 		currentState = newSystemeEmbarqueState;
 		currentState.onEntry();
 
 	}
-
-	// Les méthodes ci-dessous permettent aux autres classes de changer les états du
-	// système embarqué => publiques
 
 	/**
 	 * <strong>Description : </strong> Retourne l'état {@code estSurveille} du
@@ -141,7 +140,8 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * 
 	 * L'état du système embarqué est maintenant {@code estSurveille}.
 	 * 
-	 * @return
+	 * @return l'état {@code Monitoring} du système embarqué.
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public Etat getMonitoringState() {
 

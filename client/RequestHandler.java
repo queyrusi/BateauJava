@@ -48,7 +48,8 @@ public class RequestHandler implements Runnable {
 			  case "Stolen":
 				  
 				  try {
-					if (this.socIn.readLine().equals("@ack")) {
+					  System.out.println(socIn.readLine());
+					if (this.socIn.readLine().equals("@ack stolen")) {
 						  
 						// on a reçu un @ack du serveur, on est prêts à  passer en Tracking :
 						listeningSystemeEmbarque.changerEtat(listeningSystemeEmbarque.getTrackingState());

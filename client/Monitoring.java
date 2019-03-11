@@ -57,14 +57,6 @@ public class Monitoring implements Etat {
 		return systemeDuBateau;
 	}
 	
-	@Override
-	public void getStatus() {
-		
-		System.out.println("Je suis sous surveillance !");
-		// TODO Auto-generated method stub
-		
-	}
-	
 	/**
 	 * <strong> Description </strong>: méthode exécutée en entrée de Monitoring
 	 */

@@ -58,14 +58,12 @@ public class Stolen implements Etat{
 	public SystemeEmbarque getSystemeDuBateau() {
 		return systemeDuBateau;
 	}
-
-	@Override
-	public void getStatus() {
+	
+	public void onEntry() {
 		
-		System.out.println("Je viens de me faire voler !");
-		// TODO Auto-generated method stub
-		
+		while (systemeDuBateau.getCurrentState() == systemeDuBateau.getStolenState()) {
+			systemeDuBateau.transmettreChaine("@state stolen");
+		}
 	}
-
 
 }

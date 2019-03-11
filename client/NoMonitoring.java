@@ -56,14 +56,7 @@ public class NoMonitoring implements Etat {
 	public SystemeEmbarque getSystemeDuBateau() {
 		return systemeDuBateau;
 	}
-	
-	@Override  // TODO obsolete
-	public void getStatus() {
-		
-		System.out.println("Je ne suis pas sous surveillance !");
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	public void start() {
 		

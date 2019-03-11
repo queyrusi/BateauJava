@@ -59,14 +59,7 @@ public class Tracking implements Etat {
 		
 		return systemeDuBateau;
 	}
-	
-	@Override
-	public void getStatus() {
-		
-		System.out.println("Je me fait traquer !");
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public void onEntry() {
 		

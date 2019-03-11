@@ -143,22 +143,11 @@ public abstract class Client extends Observable {
 	 *
 	 * @return Message de réponse du serveur à la requête du Client
 	 */        
-	public String transmettreChaine(String uneChaine) {
+	public void transmettreChaine(String uneChaine) {
 		String msgServeur = null;
-		try {
-			System.out.println( "Requete client : " + uneChaine );
-			socOut.println( uneChaine );
-			socOut.flush();
-			msgServeur = socIn.readLine();
-			System.out.println( "Reponse serveur : " + msgServeur );
-
-		} catch (UnknownHostException e) {
-			System.err.println("Serveur inconnu : " + e);
-		} catch (IOException e) {
-			System.err.println("Exception entree/sortie:  " + e);
-			e.printStackTrace();
-		}
-		return msgServeur;
+		System.out.println( "Requete client : " + uneChaine );
+		socOut.println( uneChaine );
+		socOut.flush();
 	} 
 
 	public String getTypeConnexion() {
