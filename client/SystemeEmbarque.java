@@ -3,7 +3,6 @@
  */
 package client;
 
-import java.io.BufferedReader;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -49,8 +48,6 @@ public class SystemeEmbarque extends Client implements Observer {
 	// Thread à executer une fois en Monitoring
 	Thread requestHandlerThread;
 	
-	// SocIn qui prendra une valeur une fois la connexion établie
-	private BufferedReader socIn;
 
 	/**
 	 * <strong>Description : </strong> Constructeur pour le système embarqué
@@ -62,7 +59,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String EnsembleDesCapteurs) {
 
 		super(unNomServeur, unNumero, unLogin);
-		setTypeConnexion(" @Ship");
+		setTypeConnexion("@Ship");
 
 		estSurveille = new Monitoring(this);
 		nonSurveille = new NoMonitoring(this);
@@ -98,7 +95,7 @@ public class SystemeEmbarque extends Client implements Observer {
 		}
 		
 		requestHandler = new RequestHandler(this);
-		requestHandlerThread = new Thread(requestHandlerThread);
+		requestHandlerThread = new Thread(requestHandler);
 
 	}
 
@@ -210,16 +207,8 @@ public class SystemeEmbarque extends Client implements Observer {
 		System.out.println("[+] Systeme Embarque se rend compte que l'alarme sonne.");
 		System.out.println("[+] Le capteur qui s'est mis en branle est : " + (String) arg);
 		this.changerEtat(this.estVole);
-		System.out.println("[+] Je suis passe en Stolen");
+		System.out.println("[+] Alerte vol !");
 
-	}
-
-	public BufferedReader getSocIn() {
-		return socIn;
-	}
-
-	public void setSocIn(BufferedReader socIn) {
-		this.socIn = socIn;
 	}
 
 }

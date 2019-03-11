@@ -3,6 +3,8 @@
  */
 package client;
 
+import java.util.concurrent.TimeUnit;
+
 //==================
 //TODO 7/3/19 09h05
 //==================
@@ -55,6 +57,10 @@ public class Stolen implements Etat{
 		
 	}
 	
+	public String getStateLabel() {
+		return stateLabel;
+	}
+	
 	public SystemeEmbarque getSystemeDuBateau() {
 		return systemeDuBateau;
 	}
@@ -63,6 +69,12 @@ public class Stolen implements Etat{
 		
 		while (systemeDuBateau.getCurrentState() == systemeDuBateau.getStolenState()) {
 			systemeDuBateau.transmettreChaine("@state stolen");
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

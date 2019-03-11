@@ -59,10 +59,15 @@ public class Tracking implements Etat {
 		
 		return systemeDuBateau;
 	}
+	
+	public String getStateLabel() {
+		return stateLabel;
+	}
 
 	@Override
 	public void onEntry() {
 		
+		System.out.println("[+] Je passe en Tracking");
 		envoiPeriodique(); // on commence l'envoit periodique
 		this.systemeDuBateau.handling = false;
 	}
@@ -76,7 +81,7 @@ public class Tracking implements Etat {
 		while (systemeDuBateau.currentState == systemeDuBateau.getTrackingState()) {
 			
 			String chaine = systemeDuBateau.requestSensor("gps").getCapteurValueString();
-			systemeDuBateau.transmettreChaine(chaine);
+			systemeDuBateau.transmettreChaine("@pos " + chaine);
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {

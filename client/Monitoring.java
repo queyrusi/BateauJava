@@ -57,6 +57,10 @@ public class Monitoring implements Etat {
 		return systemeDuBateau;
 	}
 	
+	public String getStateLabel() {
+		return stateLabel;
+	}
+	
 	/**
 	 * <strong> Description </strong>: méthode exécutée en entrée de Monitoring
 	 */

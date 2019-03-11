@@ -56,6 +56,10 @@ public class NoMonitoring implements Etat {
 	public SystemeEmbarque getSystemeDuBateau() {
 		return systemeDuBateau;
 	}
+	
+	public String getStateLabel() {
+		return stateLabel;
+	}
 
 	
 	public void start() {

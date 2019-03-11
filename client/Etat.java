@@ -31,13 +31,10 @@ public interface Etat {
 
 	String stateLabel = null;
 	
-	default String getStateLabel() {
-		
-		return this.stateLabel;
-	}
-	
 	default void onEntry(){};
 	
-	default void onExit(){};
+	default void onExit(){}
+
+	String getStateLabel();
 	
 }

@@ -150,6 +150,30 @@ public abstract class Client extends Observable {
 		socOut.flush();
 	} 
 
+	/**
+	 * @return the socOut
+	 */
+	public PrintStream getSocOut() {
+		return socOut;
+	}
+	/**
+	 * @param socOut the socOut to set
+	 */
+	public void setSocOut(PrintStream socOut) {
+		this.socOut = socOut;
+	}
+	/**
+	 * @return the socIn
+	 */
+	public BufferedReader getSocIn() {
+		return socIn;
+	}
+	/**
+	 * @param socIn the socIn to set
+	 */
+	public void setSocIn(BufferedReader socIn) {
+		this.socIn = socIn;
+	}
 	public String getTypeConnexion() {
 		return typeConnexion;
 	}
