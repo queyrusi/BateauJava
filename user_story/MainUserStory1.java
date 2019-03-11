@@ -19,7 +19,7 @@ public class MainUserStory1 {
 	/**
 	 * <strong>Description : </strong> Main pour abonnement d'un bateau et d'un user puis connexion de ceux-ci au serveur.
 	 * @author C.Silva, R.Cuinat, S.Queyrut, P.Lledo
-	 * @param args Paramètres du main
+	 * @param args Paramï¿½tres du main
 	 */
 	public static void main(String[] args) {
 		
@@ -35,7 +35,7 @@ public class MainUserStory1 {
 		serveur.start();
 		
 		client.User newUser = new client.User(null, 6666, "toto1");
-		SystemeEmbarque newSys =  new SystemeEmbarque(null, 6666, "tata");
+		SystemeEmbarque newSys =  new SystemeEmbarque(null, 6666, "tata", "GPS");
 		
 		newUser.connecterAuServeur();
 		newSys.connecterAuServeur();
