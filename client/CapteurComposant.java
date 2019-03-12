@@ -16,8 +16,11 @@ package client;
 public interface CapteurComposant {
 	
 	/**
-	 * <strong>Description : </strong>Methode ajoutant un capteur � la liste de capteurs
+	 * <strong>Description : </strong>Methode ajoutant un capteur à la liste de capteurs
 	 * 
+	 *
+	 * @param newCapteurComposant Capteur à ajouter à la liste
+	 *
 	 * @author S. Queyrut P. Lledo
 	 */
 	public default void add(CapteurComposant newCapteurComposant) {}
@@ -25,13 +28,17 @@ public interface CapteurComposant {
 	/**
 	 * <strong>Description : </strong>Methode supprimant un capteur de la liste de capteurs
 	 * 
+	 * @param newCapteurComposent Capteur à supprimer de la liste
+	 *
 	 * @author S. Queyrut P. Lledo
 	 */
 	public default void remove(CapteurComposant newCapteurComposent) {}
 	
 	/**
-	 * <strong>Description : </strong>Getter pour un composant sp�cifique
+	 * <strong>Description : </strong>Getter pour un composant spécifique
 	 * 
+	 * @param composantIndex Capteur que l'on souhaite obtenir
+	 *
 	 * @author S. Queyrut P. Lledo
 	 */
 	public default CapteurComposant getComposant(int composantIndex) {
