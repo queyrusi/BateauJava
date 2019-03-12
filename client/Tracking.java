@@ -4,9 +4,6 @@
 package client;
 
 import java.util.concurrent.*;
-//==================
-//TODO 9/3/19 10h27
-//==================
 
 /* +--------------------+
  * | +----------------+ |              +------------------+
@@ -31,10 +28,9 @@ import java.util.concurrent.*;
  */
 
 /**
- * <strong>Description : </strong> Etat tracking pour le bateau
+ * <strong>Description : </strong> État {@code Tracking} pour le système embarqué.
  *   
- * @author chenqun
- *
+ * @author P. Lledo, S. Queyrut
  */
 public class Tracking implements Etat {
 
@@ -43,9 +39,10 @@ public class Tracking implements Etat {
 	SystemeEmbarque systemeDuBateau;
 	
 	/**
-	 * Constructeur pour l'état Tracking
+	 * <strong>Description : </strong>Constructeur pour l'état {@code Tracking}.
 	 * 
-	 * @param newSysEmbarque
+	 * @param newSysEmbarque - système embarqué qui implémente l'état.
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public Tracking(SystemeEmbarque newSysEmbarque){
 		
@@ -55,40 +52,58 @@ public class Tracking implements Etat {
 		
 	}
 	
+	/**
+	 * <strong>Description : </strong>Retourne le système embarqué qui implémente l'état.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return le système embarqué qui implémente l'état.
+	 */
 	public SystemeEmbarque getSystemeDuBateau() {
 		
 		return systemeDuBateau;
 	}
 	
+	/**
+	 * <strong>Description : </strong>Retourne le label de l'état.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return le label de l'état.
+	 */
 	public String getStateLabel() {
+		
 		return stateLabel;
 	}
 
+	/**
+	 * <strong>Description : </strong>Exécution en entrée d'état. 
+	 * Arrête la gestion des requêtes et lance l'envoi périodique (méthode {@code envoiPeriodique}.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 */
 	@Override
 	public void onEntry() {
 		
 		System.out.println("[+] Je passe en Tracking");
-		envoiPeriodique(); // on commence l'envoit periodique
+		envoiPeriodique(); // on commence l'envoi periodique
 		this.systemeDuBateau.handling = false;
 	}
 	
 	/**
-	 * <strong>Description : </strong> Lance l'envoi périodique de la position du bateau au serveur
+	 * <strong>Description : </strong> Lance l'envoi périodique de la position du bateau au serveur. 
+	 * L'envoi continue jusqu'au passage à l'état final.
 	 * 
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public void envoiPeriodique () {
 		
 		while (systemeDuBateau.currentState == systemeDuBateau.getTrackingState()) {
-			
 			String chaine = systemeDuBateau.requestSensor("gps").getCapteurValueString();
 			systemeDuBateau.transmettreChaine("@pos " + chaine);
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
-
 }

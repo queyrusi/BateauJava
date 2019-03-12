@@ -32,10 +32,9 @@ import java.util.concurrent.TimeUnit;
  */
 
 /**
- * <strong>Description : </strong> Etat Stolen pour le bateau
+ * <strong>Description : </strong> État {@code Stolen} pour le système embarqué.
  *   
- * @author chenqun
- *
+ * @author P. Lledo, S. Queyrut
  */
 public class Stolen implements Etat{
 
@@ -45,9 +44,10 @@ public class Stolen implements Etat{
 	
 	
 	/**
-	 * Constructeur pour l'état Stolen
+	 * <strong>Description : </strong>Constructeur pour l'état {@code Stolen}.
 	 * 
-	 * @param newSysEmbarque
+	 * @param newSysEmbarque - système embarqué qui implémente l'état.
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public Stolen(SystemeEmbarque newSysEmbarque){
 		
@@ -57,14 +57,33 @@ public class Stolen implements Etat{
 		
 	}
 	
+	/**
+	 * <strong>Description : </strong>Retourne le label de l'état.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return le label de l'état.
+	 */
 	public String getStateLabel() {
 		return stateLabel;
 	}
 	
+	/**
+	 * <strong>Description : </strong>Retourne le système embarqué qui implémente l'état.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return le système embarqué qui implémente l'état.
+	 */
 	public SystemeEmbarque getSystemeDuBateau() {
 		return systemeDuBateau;
 	}
 	
+	/**
+	 * <strong>Description : </strong>Exécution en entrée d'état. 
+	 * Transmet une chaîne spécifique au serveur toute les secondes tant que le système embarqué qui implémente l'état
+	 * et en {@code Stolen}.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 */
 	public void onEntry() {
 		
 		while (systemeDuBateau.getCurrentState() == systemeDuBateau.getStolenState()) {

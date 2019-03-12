@@ -29,10 +29,9 @@ package client;
  */
 
 /**
- * <strong>Description : </strong> Etat {@code Monitoring} pour le bateau
- *     
- * @author chenqun
- *
+ * <strong>Description : </strong> État {@code Monitoring} pour le système embarqué.
+ *   
+ * @author P. Lledo, S. Queyrut
  */
 public class Monitoring implements Etat {
 
@@ -41,9 +40,10 @@ public class Monitoring implements Etat {
 	SystemeEmbarque systemeDuBateau;
 	
 	/**
-	 * Constructeur pour l'état {@code Monitoring}
+	 * <strong>Description : </strong>Constructeur pour l'état {@code Monitoring}.
 	 * 
-	 * @param newSysEmbarque
+	 * @param newSysEmbarque - système embarqué qui implémente l'état.
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public Monitoring(SystemeEmbarque newSysEmbarque){
 		
@@ -53,16 +53,31 @@ public class Monitoring implements Etat {
 		
 	}
 	
+	/**
+	 * <strong>Description : </strong>Retourne le système embarqué qui implémente l'état.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return le système embarqué qui implémente l'état.
+	 */
 	public SystemeEmbarque getSystemeDuBateau() {
 		return systemeDuBateau;
 	}
 	
+	/**
+	 * <strong>Description : </strong>Retourne le label de l'état.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return le label de l'état.
+	 */
 	public String getStateLabel() {
 		return stateLabel;
 	}
 	
 	/**
-	 * <strong> Description </strong>: méthode exécutée en entrée de Monitoring
+	 * <strong> Description </strong>: méthode exécutée en entrée de Monitoring.
+	 * Lance le thread de gestion des requêtes du serveur.
+	 * 
+	 * @author P. Lledo, S. Queyrut
 	 */
 	@Override
 	public void onEntry(){

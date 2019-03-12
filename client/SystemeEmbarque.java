@@ -7,18 +7,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-//==================
-//TODO 9/3/19 23h22
-//==================
-
 /**
  * <strong>Description : </strong> Discute avec le serveur (et peut lui envoyer
  * des messages d'alarme)
  * 
  * 
  * @author P. Lledo, S. Queyrut
- * 
- *
  */
 @SuppressWarnings("deprecation")
 public class SystemeEmbarque extends Client implements Observer {
@@ -34,7 +28,7 @@ public class SystemeEmbarque extends Client implements Observer {
 
 	// capteurs
 	CapteurComposant capteurList; // contient chaque Capteur, CapteurGroupe et tout Capteur sauvegardé dans les
-									// CapteurGroupes
+								  // CapteurGroupes
 
 	// variable d'activation du requestHandler
 	boolean handling;
@@ -135,8 +129,6 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * }
 	 * </pre>
 	 * 
-	 * L'état du système embarqué est maintenant {@code estSurveille}.
-	 * 
 	 * @return l'état {@code Monitoring} du système embarqué.
 	 * @author P. Lledo, S. Queyrut
 	 */
@@ -149,7 +141,8 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * <strong>Description : </strong> Retourne l'état {@code nonSurveille} du
 	 * système embarqué
 	 * 
-	 * @return
+	 * @return l'état {@code NoMonitoring} du système embarqué.
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public Etat getNoMonitoringState() {
 
@@ -160,7 +153,8 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * <strong>Description : </strong> Retourne l'état {@code estVole} du système
 	 * embarqué
 	 * 
-	 * @return
+	 * @return l'état {@code Stolen} du système embarqué.
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public Etat getStolenState() {
 
@@ -169,25 +163,55 @@ public class SystemeEmbarque extends Client implements Observer {
 
 	/**
 	 * <strong>Description : </strong> Retourne l'état {@code estTraque} du système
-	 * embarqué
+	 * embarqué.
 	 * 
-	 * @return
+	 * @return l'état {@code Tracking} du système embarqué.
+	 * @author P. Lledo, S. Queyrut
 	 */
 	public Etat getTrackingState() {
 
 		return estTraque;
 	}
 
+	/**
+	 * <strong>Description : </strong> Retourne l'array de capteurs du système
+	 * embarqué.
+	 * 
+	 * @return la liste (type {@code CapteurComposant}) des capteurs du système embarqué.
+	 * @author P. Lledo, S. Queyrut
+	 * 
+	 */
 	public CapteurComposant getCapteurList() {
 
 		return capteurList;
 	}
 
+	/**
+	 * <strong>Description : </strong> Setter de l'array de capteurs du système
+	 * embarqué.
+	 *
+	 * @author P. Lledo, S. Queyrut
+	 */
 	public void setCapteurList(CapteurComposant capteurList) {
 
 		this.capteurList = capteurList;
 	}
 
+	/**
+	 * <strong>Description : </strong> Retourne le capteur appellé dans le string en paramètre.
+	 * 
+	 * Un exemple d'utilisation dans une classe distante est :
+	 *
+	 * <pre>
+	 * {@code
+	 *  systemeDuBateau.requestSensor("gps");
+	 * }
+	 * </pre>
+	 *
+	 * @param sensor - string (label) du capteur auquel on veut accéder.
+	 * @return le capteur auquel on veut accéder.
+	 * @author P. Lledo, S. Queyrut
+	 */
 	public CapteurComposant requestSensor(String sensor){
 		
 		for (CapteurComposant capteur : ((CapteurGroupe)capteurList).getcapteurComposants()) {
@@ -201,6 +225,22 @@ public class SystemeEmbarque extends Client implements Observer {
 		return null;
 	}
 
+	/**
+	 * <strong>Description : </strong> Change l'état du système embarqué à {@code estVole} (type {@code Stolen})
+	 * après mise en branle d'un capteur (utilisation de {@code notify}).
+	 * 
+	 * Un exemple d'utilisation dans une classe distante est :
+	 *
+	 * <pre>
+	 * {@code
+	 *  systemeDuBateau.requestSensor("gps");
+	 * }
+	 * </pre>
+	 *
+	 * @param o - observable qui peut déclencher la méthode {@code update}.
+	 * @param arg - label du capteur qui se met en branle.
+	 * @author P. Lledo, S. Queyrut
+	 */
 	@Override
 	public void update(Observable o, Object arg) { // est appellée quand le systeme d'alarme fait notifyObserver
 

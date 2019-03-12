@@ -21,9 +21,9 @@ package client;
  */
 
 /**
- * <strong>Description : </strong> Définit une méthode d'échange 
+ * <strong>Description : </strong> Définit une méthode d'échange .
  * 
- * @author chenqun
+ * @author P. Lledo, S. Queyrut
  *
  */
 public interface Etat {
