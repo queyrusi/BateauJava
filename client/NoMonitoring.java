@@ -75,7 +75,6 @@ public class NoMonitoring implements Etat {
 	 * Une fois la connexion établie, passe le système embarqué en état {@code Monitoring}.
 	 * 
 	 * @author P. Lledo, S. Queyrut
-	 * @return le label de l'état.
 	 */
 	public void start() {
 		
