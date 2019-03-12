@@ -11,7 +11,7 @@ import java.lang.Math.*;
 //TODO 6/3/19 15h45
 //===================
 
-/**<strong>Description : </strong>Classe GPS h�ritant de capteur
+/**<strong>Description : </strong>Classe GPS héritant de capteur
  * 
  * @author S. Queyrut P. Lledo
  *
@@ -34,8 +34,8 @@ public class GPS extends Capteur {
 	 * 
 	 * <strong>Exemple : </strong>GPS("gps",monAlarme)
 	 * 
-	 * @param newCapteurName
-	 * @param newCapteurLabel
+	 * @param newCapteurLabel Nom du GPS à instancier
+	 * @param newSystAlarme Système d'alarme auquel est rattaché le GPS
 	 * 
 	 * @author S. Queyrut P. Lledo
 	 */
@@ -49,8 +49,10 @@ public class GPS extends Capteur {
 	}
 	
 	/**
-	 * <strong>Description : </strong>G�n�rateur pseudo-al�atoire de latitude orient�e Nord
+	 * <strong>Description : </strong>Générateur pseudo-aléatoire de latitude orientée Nord
 	 * 
+	 * @return Retourne une latitude orientée Nord générée aléatoirement
+	 *
 	 * @author S. Queyrut P. Lledo
 	 */
 	public float generateCoordinateNorth() {
@@ -59,8 +61,10 @@ public class GPS extends Capteur {
 	}
 
 	/**
-	 * <strong>Description : </strong>G�n�rateur pseudo-al�atoire de longitude orient�e Est
+	 * <strong>Description : </strong>Générateur pseudo-aléatoire de longitude orientée Est
 	 * 
+	 * @return Retourne une longitude orientée Est générée aléatoirement
+	 *
 	 * @author S. Queyrut P. Lledo
 	 */
 	public float generateCoordinateEast() {
@@ -71,7 +75,7 @@ public class GPS extends Capteur {
 		
 	@Override
 	/**
-	 * <strong>Description : </strong>Methode d�marrant la simulation de donn�es GPS
+	 * <strong>Description : </strong>Methode démarrant la simulation de données GPS
 	 * 
 	 * @author S. Queyrut P. Lledo
 	 */
@@ -107,6 +111,8 @@ public class GPS extends Capteur {
 	/**
 	 * <strong>Description : </strong>Getter pour obtenir la valeur du capteur
 	 * 
+	 * @return Retourne la valeur du capteur sous forme de String
+	 *
 	 * @author S. Queyrut P. Lledo
 	 */
 	public String getCapteurValueString() {
