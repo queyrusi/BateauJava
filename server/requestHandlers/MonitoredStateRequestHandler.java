@@ -87,6 +87,7 @@ public void run() {
 								if (fields.length == 2 && fields[1].compareTo("stolen") == 0) {
 									socketOutput.write("@ack stolen");
 									socketOutput.newLine();
+									socketOutput.flush();
 									this.ship.setState(new TrackingState(this.ship));
 									running = false;
 									TrackingStateRequestHandler TSRH = new TrackingStateRequestHandler(ship, this.centralContext, this.socketInput, socketOutput);
