@@ -25,9 +25,9 @@ import java.util.Observable;
  */
 
 /**
- * <strong>Description : </strong> Classe permettant de creer des objets pour détecter une cause d'alarme.
+ * <strong>Description : </strong> Classe permettant de créer des capteurs pour détecter une cause d'alarme.
  *
- * @author chenqun
+	 * @author P. Lledo, S. Queyrut
  *
  */
 @SuppressWarnings("deprecation")
@@ -38,7 +38,13 @@ public abstract class Capteur extends Observable implements CapteurComposant {
 	
 	String capteurLabel;
 	
-	
+	/**
+	 * <strong>Description : </strong>Constructeur pour la classe {@code Capteur}.
+	 * 
+	 * @param newCapteurLabel - label du nouveau capteur.
+	 * @param newSystAlarme - alarme que le capteur doit notifier en cas de problème.
+	 * @author P. Lledo, S. Queyrut
+	 */
 	public Capteur(String newCapteurLabel, SystAlarme newSystAlarme) {
 		
 		capteurLabel = newCapteurLabel;  // gps1
@@ -47,20 +53,38 @@ public abstract class Capteur extends Observable implements CapteurComposant {
 		
 	}
 	
+	/**
+	 * <strong>Description : </strong>Ajoute un abonné {@code SystAlarme}.
+	 * 
+	 * @param newSystAlarme - alarme que le capteur doit notifier en cas de problème.
+	 * @author P. Lledo, S. Queyrut
+	 */
 	private void addObserverPerso(SystAlarme newSystAlarme) {
 
 		addObserver(newSystAlarme);
 		this.systAlarmeList.add(newSystAlarme); // TODO
 	}
 	
+	/**
+	 * <strong>Description : </strong>Getter qui retourne le label du capteur.
+	 * 
+	 * @return capteurLabel - le label du capteur.
+	 * @author P. Lledo, S. Queyrut
+	 */
 	public String getCapteurLabel() {
 		
 		return capteurLabel;
 		
 	}
 	
+	
 	public abstract String getCapteurValueString();
 	
+	/**
+	 * <strong>Description : </strong>Met l'alarme en branle.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 */
 	public void warning() {
 		
 		System.out.println("[+] Capteur warning");
