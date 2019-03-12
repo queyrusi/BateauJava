@@ -113,7 +113,7 @@ public class GPS extends Capteur {
 		// TODO retouner un string des valeurs Nord et Est 
 		// type primitif Integer.toString(item.getId());   !!!
 		
-		return "2";
+		return "2 5";
 	} 
 	
 

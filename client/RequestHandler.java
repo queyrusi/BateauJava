@@ -5,6 +5,7 @@ package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.SocketException;
 import java.util.concurrent.TimeUnit;
 
 // ==================
@@ -56,55 +57,60 @@ public class RequestHandler implements Runnable {
 			
 			try {
 				maLigne = this.listeningSystemeEmbarque.getSocIn().readLine();
-			} catch (IOException e1) {
+				if (maLigne != null) {
+					receivedLine = maLigne.split(" ");
+				
+				// switch sur l'√©tat actuel du syst√®me embarqu√© :
+				switch(receivedLine[0]) { 
+
+				  case "@ack":
+					  
+					if (receivedLine[1].equals("stolen")) {
+						  listeningSystemeEmbarque.changerEtat(listeningSystemeEmbarque.getTrackingState());
+					  }
+					
+					break;
+				    
+				  case "@req":
+					
+					sensorNumbers = receivedLine.length-1;
+					
+					// cas "all" : on demande tous les capteurs :
+					if (receivedLine[1].equals("all")) {
+						
+						
+						// on parcourt la liste de tous les composants du syst√®me embarqu√©
+						for (CapteurComposant capteur : ((CapteurGroupe)listeningSystemeEmbarque.capteurList).getcapteurComposants()) {
+							
+							value += capteur.getCapteurLabel() + " ";
+							value += capteur.getCapteurValueString() + " ";
+							
+							}
+					}
+								
+					// cas non-"all" ; requete capteur par capteur :
+					else {
+						for (int i = 1; i <= sensorNumbers; i++) { 
+							
+							// valeur de chacun des capteurs demand√© :
+						  	value += this.listeningSystemeEmbarque.requestSensor(receivedLine[i]).getCapteurValueString();  
+							value += " ";
+						}
+					}
+					this.listeningSystemeEmbarque.transmettreChaine(value);
+					
+					break;	
+					} 
+				}
+			} catch (SocketException e) {
+				System.out.println("Fermeture du socket");
+				this.listeningSystemeEmbarque.handling = false;
+			}catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			receivedLine = maLigne.split(" ");
-			
-			// switch sur le message du serveur :
-			switch(receivedLine[0]) { 
-			
-			  case "@ack":
-				  
-				if (receivedLine[1].equals("stolen")) {
-					  listeningSystemeEmbarque.changerEtat(listeningSystemeEmbarque.getTrackingState());
-				  }
-				
-				break;
+			}   				  
 			    
-			  case "@req":
-				
-				sensorNumbers = receivedLine.length-1;
-				
-				// cas "all" : on demande tous les capteurs :
-				if (receivedLine[1].equals("all")) {
-					
-					
-					// on parcourt la liste de tous les composants du systËme embarquÈ
-					for (CapteurComposant capteur : ((CapteurGroupe)listeningSystemeEmbarque.capteurList).getcapteurComposants()) {
-						
-						value += capteur.getCapteurLabel() + " ";
-						value += capteur.getCapteurValueString() + " ";
-						
-						}
-				}
-							
-				// cas non-"all" ; requete capteur par capteur :
-				else {
-					for (int i = 1; i <= sensorNumbers; i++) { 
-						
-						// valeur de chacun des capteurs demandÈ :
-					  	value += this.listeningSystemeEmbarque.requestSensor(receivedLine[i]).getCapteurValueString();  
-						value += " ";
-					}
-				}
-				this.listeningSystemeEmbarque.transmettreChaine(value);
-						}
-				
-				break;	
-				}  
-			    				  
-			    
-			}
+		}
+		System.out.println("Fin du thread RequestHandler Systeme embarquÈ.");
+	}
 	}

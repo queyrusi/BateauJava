@@ -128,6 +128,7 @@ public abstract class Client extends Observable {
 		try {
 			System.out.println("[ClientTCP] CLIENT : " + socketServeur);
 			socOut.println("@quit");
+			socOut.flush();
 			socOut.close();
 			socIn.close();
 			socketServeur.close();
@@ -141,7 +142,7 @@ public abstract class Client extends Observable {
 	 *
 	 * @param uneChaine Chaine à transmettre au serveur
 	 *
-	 * @return Message de réponse du serveur à la requête du Client
+	 *
 	 */        
 	public void transmettreChaine(String uneChaine) {
 		String msgServeur = null;

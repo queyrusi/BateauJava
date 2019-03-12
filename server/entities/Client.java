@@ -23,7 +23,7 @@ public abstract class Client {
 	/**
 	 * <strong>Description : </strong> Méthode permettant d'accéder au gestionnaire de requête instancié à destination des échanges avec un client connecté au serveur.
 	 * @author C.Silva, R.Cuinat
-	 * @param Un gestionnaire de requête.
+	 * @param requestHandler Un gestionnaire de requête.
 	 */
 	public void setRequestHandler(RequestHandler requestHandler) {
 		this.requestHandler = requestHandler;
