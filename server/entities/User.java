@@ -35,6 +35,7 @@ public class User extends Client {
 		this.date_abo = Calendar.getInstance().getTime();
 		this.liste_amis=LPDC;
 		this.bateau = bateau;
+		System.out.println("Le Client " +this.nom + " a comme identifiant : " + this.id);
 	}
 	/**
 	 * <strong>Description : </strong> Getter de la variable d'instance nom

@@ -14,7 +14,7 @@ public class MonitoredState extends ShipState {
 	 */
 	public MonitoredState(Ship ship) {
 		super(ship);
-		// TODO Auto-generated constructor stub
+		System.out.println("Le bateau immatriculé " + ship.getImmatriculation() + " est en état MONITORED");
 	}
 	
 	public String toString() {

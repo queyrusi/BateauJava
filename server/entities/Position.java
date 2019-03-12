@@ -32,5 +32,9 @@ public class Position {
 	public double[] getCoordsInRad() {
 		return new double[] {latitude*Math.PI/180,longitude*Math.PI/180};
 	}
+	
+	public String toString() {
+		return "("+this.latitude+" ; "+this.longitude+")";
+	}
 
 }
