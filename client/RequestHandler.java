@@ -11,8 +11,9 @@ import java.util.concurrent.TimeUnit;
 // TODO 9/3/19 10h33
 // ==================
 
-/**
- * @author chenqun
+/**<strong>Description : </strong>Classe gérant les requêtes et réponses du serveur
+ * 
+ * @author S. Queyrut P. Lledo
  *
  */
 public class RequestHandler implements Runnable {
@@ -22,8 +23,11 @@ public class RequestHandler implements Runnable {
 	BufferedReader socIn;
 	
 
-	/**
+	/**<strong>Description : </strong>Constructeur de la classe RequestHandler
+	 * Le request handler doit être instancié par un système embarqué pour fonctionner
+	 * <strong>Exemple : </strong>RequestHandler(this)
 	 * 
+	 * @author S. Queyrut P. Lledo
 	 */
 	public RequestHandler(SystemeEmbarque newSystemeEmbarque) {
 		
@@ -31,7 +35,12 @@ public class RequestHandler implements Runnable {
 		socIn = newSystemeEmbarque.getSocIn();
 		
 	}
-
+	/**<strong>Description : </strong>Surcharge de la methode run de runnable permettant de l'éxecuter
+	 * dans un Thread. Sa fonction est de recevoir et traiter les messages provenant du serveur tant que
+	 * cela est nécessaire
+	 * 
+	 * @author S. Queyrut P. Lledo
+	 */
 	@Override
 	public void run() {
 		
@@ -53,9 +62,9 @@ public class RequestHandler implements Runnable {
 			}
 			receivedLine = maLigne.split(" ");
 			
-			// switch sur l'Ã©tat actuel du systÃ¨me embarquÃ© :
+			// switch sur le message du serveur :
 			switch(receivedLine[0]) { 
-
+			
 			  case "@ack":
 				  
 				if (receivedLine[1].equals("stolen")) {
@@ -72,7 +81,7 @@ public class RequestHandler implements Runnable {
 				if (receivedLine[1].equals("all")) {
 					
 					
-					// on parcourt la liste de tous les composants du systÃ¨me embarquÃ©
+					// on parcourt la liste de tous les composants du système embarqué
 					for (CapteurComposant capteur : ((CapteurGroupe)listeningSystemeEmbarque.capteurList).getcapteurComposants()) {
 						
 						value += capteur.getCapteurLabel() + " ";
@@ -85,7 +94,7 @@ public class RequestHandler implements Runnable {
 				else {
 					for (int i = 1; i <= sensorNumbers; i++) { 
 						
-						// valeur de chacun des capteurs demandÃ© :
+						// valeur de chacun des capteurs demandé :
 					  	value += this.listeningSystemeEmbarque.requestSensor(receivedLine[i]).getCapteurValueString();  
 						value += " ";
 					}
