@@ -49,6 +49,11 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * <strong>Exemple : </strong> SystemeEmbarque("monServeur", "newLogin",
 	 * "gps;thermometre")
 	 * 
+	 * @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
+	 * @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
+	 * @param unLogin - login d'accès au serveur.
+	 * @param EnsembleDesCapteurs - string contenant les capteurs dont sera doté le système embarqué.
+	 * 
 	 */
 	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String EnsembleDesCapteurs) {
 
@@ -190,6 +195,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * <strong>Description : </strong> Setter de l'array de capteurs du système
 	 * embarqué.
 	 *
+	 * @param capteurList - array de capteurs du système embarqué.
 	 * @author P. Lledo, S. Queyrut
 	 */
 	public void setCapteurList(CapteurComposant capteurList) {

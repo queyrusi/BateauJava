@@ -38,9 +38,9 @@ public abstract class Client extends Observable {
 	 *  Un client se connecte a un serveur identifie par un nom ({@code unNomServeur}), sur un port ({@code unNumero}), 
 	 *  et s'identifie par un login ({@code unLogin}). 
 	 *  
-	 *  @param unNomServeur
-	 *  @param unNumero
-	 *  @param unLogin
+	 *  @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
+	 *  @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
+	 *  @param unLogin  - login d'accès au serveur.
 	 */
 	public  Client(String unNomServeur, int unNumero, String unLogin) { 
 		
