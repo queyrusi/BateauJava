@@ -17,6 +17,8 @@ public class ServeurTCP extends Thread{
 	private IProtocole protocole;
 	
 	private int numeroPort;
+	
+	private ServerSocket serverSocket;
 
 	public ServeurTCP(int unNumeroPort) {        
 		numeroPort = unNumeroPort;
@@ -43,7 +45,7 @@ public class ServeurTCP extends Thread{
 
 	/* l'ancienne methode go est remplacee par run */
 	public void run() {        
-		ServerSocket serverSocket = null;
+		this.serverSocket = null;
 		try {
 			serverSocket = new ServerSocket ( numeroPort );
 		} catch (IOException e) {
@@ -59,27 +61,34 @@ public class ServeurTCP extends Thread{
 				clientSocket = serverSocket.accept();
 				nbConnexions ++;
 				System.out.println("Nb automates : " + nbConnexions);
+				ConnectionThread ct = new ConnectionThread( clientSocket , this );
+				ct.start();
+			}catch (SocketException e) {
+				System.out.println("Fermeture du serveur");
 			} catch (IOException e) {
 				System.out.println("Accept failed: " + serverSocket.getLocalPort() + ", " + e);
 				System.exit(1);
 			}
-			ConnectionThread ct = new ConnectionThread( clientSocket , this );
-			ct.start();
 		}
-		System.out.println("Deja " + nbConnexions + " clients. Maximum autorisé atteint");
-
-		try {
-			serverSocket.close();
-			nbConnexions --;
-		} catch (IOException e) {
-			System.out.println("Could not close");
-		}
+		this.disconnect();
 
 	} 
 	
 
 	public IProtocole getProtocole() {
 		return protocole;
+	}
+
+	public void disconnect() {
+		// TODO Auto-generated method stub
+		try {
+			nbConnexions = maxConnexions + 1;
+			this.serverSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			nbConnexions = 0;
+		}
+		
 	}		
 
 }

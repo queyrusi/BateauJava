@@ -15,7 +15,7 @@ public class TrackingState extends ShipState {
 	public TrackingState(Ship ship) {
 		// TODO Auto-generated constructor stub
 		super(ship);
-		System.out.println("Le bateau immatriculé " + ship.getImmatriculation() + "est en état TRACKING.");
+		System.out.println("Le bateau immatriculé " + ship.getImmatriculation() + " est en état TRACKING.");
 	}
 	
 	public String toString() {
