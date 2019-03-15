@@ -5,6 +5,7 @@ package client;
 
 import java.util.Observable;
 import java.util.Observer;
+import fr.ensta.fx.boatmonitoring.FXBoatUI;
 
 
 /**
@@ -32,6 +33,9 @@ public class SystemeEmbarque extends Client implements Observer {
 
 	// variable d'activation du requestHandler
 	boolean handling;
+	
+	//variable discriminant la pr�sence d'un affichage
+	private boolean hasUI;
 
 	// le système d'alarme
 	SystAlarme systAlarme;
@@ -52,13 +56,16 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
 	 * @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
 	 * @param unLogin - login d'accès au serveur.
+	 * @param unPassword - mot de passe associ� au login d'acc�s.
 	 * @param EnsembleDesCapteurs - string contenant les capteurs dont sera doté le système embarqué.
 	 * 
 	 */
-	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String EnsembleDesCapteurs) {
+	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String unPassword, String EnsembleDesCapteurs) {
 
-		super(unNomServeur, unNumero, unLogin);
+		super(unNomServeur, unNumero, unLogin, unPassword);
 		setTypeConnexion("@Ship");
+		
+		hasUI=false;
 
 		estSurveille = new Monitoring(this);
 		nonSurveille = new NoMonitoring(this);
@@ -99,6 +106,67 @@ public class SystemeEmbarque extends Client implements Observer {
 	}
 
 	/**
+	 * <strong>Description : </strong> Constructeur pour le système embarqué
+	 * 
+	 * Cette version impl�mente la pr�sence d'une UI
+	 * 
+	 * <strong>Exemple : </strong> SystemeEmbarque("monServeur", "newLogin",
+	 * "gps;thermometre")
+	 * 
+	 * @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
+	 * @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
+	 * @param unLogin - login d'accès au serveur.
+	 * @param unPassword - mot de passe associ� au login d'acc�s.
+	 * @param EnsembleDesCapteurs - string contenant les capteurs dont sera doté le système embarqué.
+	 * @param unUI - UI associ�e au client.
+	 * 
+	 */
+	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String unPassword, FXBoatUI unUI, String EnsembleDesCapteurs) {
+
+		super(unNomServeur, unNumero, unLogin, unPassword, unUI);
+		setTypeConnexion("@Ship");
+		
+		hasUI=true;
+
+		estSurveille = new Monitoring(this);
+		nonSurveille = new NoMonitoring(this);
+		estVole = new Stolen(this);
+		estTraque = new Tracking(this);
+
+		currentState = nonSurveille; // état initial du système embarqué
+
+		systAlarme = new SystAlarme(this);
+
+		capteurList = new CapteurGroupe("Ensemble capteurs");
+
+		// TODO il y a plusieurs capteurs a ajouter
+		String[] Ensemble = EnsembleDesCapteurs.split(";");
+		int k = 0;
+		String typeDeCapteur = Ensemble[k];
+		
+		// tnat qu'il y a ds capteurs a ajouter
+		while (!typeDeCapteur.equals(null) & k < Ensemble.length)  { //ajouter un à un les capteurs décrits par le string EnsembleDesCapteurs
+				
+			typeDeCapteur = Ensemble[k];
+			
+			switch (typeDeCapteur) {
+
+			case "GPS":
+				
+				GPS newGPS = new GPS("gps", this.systAlarme);
+				getCapteurList().add(newGPS);
+				break;
+			}	
+			k++;  // on passe au capteur suivant
+
+		}
+		
+		requestHandler = new RequestHandler(this);
+		requestHandlerThread = new Thread(requestHandler);
+
+	}
+	
+	/**
 	 * <strong>Description : </strong>Retourne l'état courant du système embarqué.
 	 * 
 	 * @author P. Lledo, S. Queyrut
@@ -106,6 +174,16 @@ public class SystemeEmbarque extends Client implements Observer {
 	 */
 	public Etat getCurrentState() {
 		return currentState;
+	}
+	
+	/**
+	 * <strong>Description : </strong>Retourne s'il y a pr�sence d'une UI.
+	 * 
+	 * @author P. Lledo, S. Queyrut
+	 * @return l'état courant du système embarqué.
+	 */
+	public boolean gethasUI() {
+		return hasUI;
 	}
 
 	/**
@@ -249,11 +327,18 @@ public class SystemeEmbarque extends Client implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) { // est appellée quand le systeme d'alarme fait notifyObserver
-
-		System.out.println("[+] Systeme Embarque se rend compte que l'alarme sonne.");
-		System.out.println("[+] Le capteur qui s'est mis en branle est : " + (String) arg);
-		this.changerEtat(this.estVole);
-		System.out.println("[+] Alerte vol !");
+		if(!gethasUI()) {
+			System.out.println("[+] Systeme Embarque se rend compte que l'alarme sonne.");
+			System.out.println("[+] Le capteur qui s'est mis en branle est : " + (String) arg);
+			this.changerEtat(this.estVole);
+			System.out.println("[+] Alerte vol !");
+		}else {
+			// TODO remplacer les println par des entr�es dans le log
+			System.out.println("[+] Systeme Embarque se rend compte que l'alarme sonne.");
+			System.out.println("[+] Le capteur qui s'est mis en branle est : " + (String) arg);
+			this.changerEtat(this.estVole);
+			System.out.println("[+] Alerte vol !");
+		}
 
 	}
 

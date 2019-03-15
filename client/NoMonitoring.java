@@ -78,8 +78,14 @@ public class NoMonitoring implements Etat {
 	 */
 	public void start() {
 		
-		while (!systemeDuBateau.connecterAuServeur()) {
-			System.out.println("[+] en attente de connexion...");
+		if(!systemeDuBateau.gethasUI()) {
+				while (!systemeDuBateau.connecterAuServeur()) {
+				System.out.println("[+] en attente de connexion...");
+			}
+		}else {
+			while (!systemeDuBateau.connecterAuServeurUI()) {
+				System.out.println("[+] en attente de connexion...");
+			}
 		}
 		// connexion établie, on passe en état Monitoring :
 		systemeDuBateau.changerEtat(systemeDuBateau.getMonitoringState());
