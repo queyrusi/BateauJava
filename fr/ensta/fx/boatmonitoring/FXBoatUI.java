@@ -53,7 +53,6 @@ public class FXBoatUI extends FXUserUI {
 
     @Override
     public void logout() {
-        this.displayWarning("Logout", "Unsupported operation");
         sys.deconnecterDuServeurUI();
     }
 
@@ -64,8 +63,10 @@ public class FXBoatUI extends FXUserUI {
 
     @Override
     public void changePassword(String oldPassword, String newPassword) {
-    	if(oldPassword.equals(sys.getPassword()))
-        sys.setPassword(newPassword);
+    	if(oldPassword.equals(sys.getPassword())){
+            sys.transmettreChaine("@set pass "+newPassword);
+            sys.setPassword(newPassword);
+        }
     }
 
     @Override
