@@ -10,8 +10,8 @@ import fr.ensta.fx.boatmonitoring.user.FXUserUI;
 
 
 /**
- * <strong>Description : </strong> : Client générique duquel hérite les client {@code User} et {@code SystemeEmbarque}.
- * Intègre l'ensemble des methodes qui permettent la gestion de connexion et le transfert d'informations vers un serveur TCP générique.
+ * <strong>Description : </strong> : Client gÃ©nÃ©rique duquel hÃ©rite les client {@code User} et {@code SystemeEmbarque}.
+ * IntÃ¨gre l'ensemble des methodes qui permettent la gestion de connexion et le transfert d'informations vers un serveur TCP gÃ©nÃ©rique.
  *
  * @author P. Lledo
  */
@@ -41,13 +41,13 @@ public abstract class Client extends Observable {
 	/**
 	 * <strong>Description : </strong> Classe {@code Client} de laquelle {@code User} et {@code SystemeEmbarque} devront heriter.
 	 *  Un client se connecte a un serveur identifie par un nom ({@code unNomServeur}), sur un port ({@code unNumero}), 
-	 *  et s'identifie par un login ({@code unLogin}). Cette version g�re les erreurs pour l'UI
+	 *  et s'identifie par un login ({@code unLogin}). Cette version gère les erreurs pour l'UI
 	 *  
-	 *  @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
-	 *  @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
-	 *  @param unLogin  - login d'accès au serveur.
-	 *  @param unPassword - mot de passe associ� au login d'acc�s.
-	 *  @param unUI - UI associ�e au client.
+	 *  @param unNomServeur - hostname du serveur que le systÃ¨me embarquÃ© cherche Ã  joindre.
+	 *  @param unNumero - numÃ©ro de port du serveur que le systÃ¨me embarquÃ© cherche Ã  joindre.
+	 *  @param unLogin  - login d'accÃ¨s au serveur.
+	 *  @param unPassword - mot de passe associé au login d'accès.
+	 *  @param unUI - UI associée au client.
 	 */
 	public  Client(String unNomServeur, int unNumero, String unLogin, String unPassword, FXUserUI unUI) { 
 		
@@ -65,10 +65,10 @@ public abstract class Client extends Observable {
 	 *  Un client se connecte a un serveur identifie par un nom ({@code unNomServeur}), sur un port ({@code unNumero}), 
 	 *  et s'identifie par un login ({@code unLogin}). 
 	 *  
-	 *  @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
-	 *  @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
-	 *  @param unLogin  - login d'accès au serveur.
-	 *  @param unPassword - mot de passe associ� au login d'acc�s.
+	 *  @param unNomServeur - hostname du serveur que le systÃ¨me embarquÃ© cherche Ã  joindre.
+	 *  @param unNumero - numÃ©ro de port du serveur que le systÃ¨me embarquÃ© cherche Ã  joindre.
+	 *  @param unLogin  - login d'accÃ¨s au serveur.
+	 *  @param unPassword - mot de passe associé au login d'accès.
 	 */
 	public  Client(String unNomServeur, int unNumero, String unLogin, String unPassword) { 
 		
@@ -83,7 +83,7 @@ public abstract class Client extends Observable {
    /**
 	* <strong>Description : </strong>Methode de connexion au serveur avec UI
 	*
-	* @return Renvoie true si la connexion a été éffectuée
+	* @return Renvoie true si la connexion a Ã©tÃ© Ã©ffectuÃ©e
 	*/
 	public boolean connecterAuServeurUI() { 
 		
@@ -151,9 +151,9 @@ public abstract class Client extends Observable {
 	}
 	
 	   /**
-		* <strong>Description : </strong>Methode de connexion au serveur sans UI pour les User stories pr�c�dentes
+		* <strong>Description : </strong>Methode de connexion au serveur sans UI pour les User stories précédentes
 		*
-		* @return Renvoie true si la connexion a été éffectuée
+		* @return Renvoie true si la connexion a Ã©tÃ© Ã©ffectuÃ©e
 		*/
 		public boolean connecterAuServeur() { 
 			
@@ -174,6 +174,8 @@ public abstract class Client extends Observable {
 				// initialisation de la connexion :
 				socOut.println(getTypeConnexion());
 				socOut.println(login);
+				socOut.println(password);
+				answer = socIn.readLine();
 				
 			} catch (UnknownHostException e) {
 				System.err.println("[+]Serveur inconnu : " + e);
@@ -255,7 +257,7 @@ public abstract class Client extends Observable {
 	
 	
    /**
-	* <strong>Description : </strong>Methode de déconnexion au serveur
+	* <strong>Description : </strong>Methode de dÃ©connexion au serveur
 	*/
 	public void deconnecterDuServeur() { 
 		try {
@@ -271,7 +273,7 @@ public abstract class Client extends Observable {
 	} 	
 	
 	   /**
-		* <strong>Description : </strong>Methode de déconnexion au serveur
+		* <strong>Description : </strong>Methode de dÃ©connexion au serveur
 		*/
 		public void deconnecterDuServeurUI() { 
 			try {
@@ -287,9 +289,9 @@ public abstract class Client extends Observable {
 		} 
 	
 	/**
-	 * <strong>Description : </strong> Methode transmettant une chaine de caractères au serveur
+	 * <strong>Description : </strong> Methode transmettant une chaine de caractÃ¨res au serveur
 	 *
-	 * @param uneChaine Chaine à transmettre au serveur
+	 * @param uneChaine Chaine Ã  transmettre au serveur
 	 *
 	 *
 	 */        
