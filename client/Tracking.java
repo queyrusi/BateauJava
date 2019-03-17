@@ -4,6 +4,7 @@
 package client;
 
 import java.util.concurrent.*;
+import fr.ensta.fx.boatmonitoring.*;
 
 /* +--------------------+
  * | +----------------+ |              +------------------+
@@ -82,8 +83,12 @@ public class Tracking implements Etat {
 	 */
 	@Override
 	public void onEntry() {
+		if(!systemeDuBateau.gethasUI()) {
+			System.out.println("[+] Je passe en Tracking");
+		}else {
+			systemeDuBateau.getUI().getLogList().add("[+] Je passe en Tracking");
+		}
 		
-		System.out.println("[+] Je passe en Tracking");
 		envoiPeriodique(); // on commence l'envoi periodique
 		this.systemeDuBateau.handling = false;
 	}

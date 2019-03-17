@@ -334,10 +334,10 @@ public class SystemeEmbarque extends Client implements Observer {
 			System.out.println("[+] Alerte vol !");
 		}else {
 			// TODO remplacer les println par des entrées dans le log
-			System.out.println("[+] Systeme Embarque se rend compte que l'alarme sonne.");
-			System.out.println("[+] Le capteur qui s'est mis en branle est : " + (String) arg);
+			this.getUI().getLogList().add("[+] Systeme Embarque se rend compte que l'alarme sonne.");
+			this.getUI().getLogList().add("[+] Le capteur qui s'est mis en branle est : " + (String) arg);
 			this.changerEtat(this.estVole);
-			System.out.println("[+] Alerte vol !");
+			this.getUI().getLogList().add("[+] Alerte vol !");
 		}
 
 	}

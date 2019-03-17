@@ -144,7 +144,7 @@ public abstract class Client extends Observable {
 		}
 		
 		if (ok) {
-			System.out.println("[+]connexion faite");
+			ClientUI.getLogList().add("[+]connexion faite");
 		}
 		return ok;
 		
@@ -241,6 +241,14 @@ public abstract class Client extends Observable {
 		this.login = login;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String pass) {
+		this.password = pass;
+	}
+	
 	public FXUserUI getUI() {
 		return ClientUI;
 	}
@@ -251,7 +259,7 @@ public abstract class Client extends Observable {
 	*/
 	public void deconnecterDuServeur() { 
 		try {
-			System.out.println("[ClientTCP] CLIENT : " + socketServeur);
+			System.out.println("Deconnexion");
 			socOut.println("@quit");
 			socOut.flush();
 			socOut.close();
@@ -261,6 +269,22 @@ public abstract class Client extends Observable {
 			System.err.println("Exception lors de la deconnexion :  " + e);
 		}
 	} 	
+	
+	   /**
+		* <strong>Description : </strong>Methode de déconnexion au serveur
+		*/
+		public void deconnecterDuServeurUI() { 
+			try {
+				ClientUI.getLogList().add("Deconnexion");
+				socOut.println("@quit");
+				socOut.flush();
+				socOut.close();
+				socIn.close();
+				socketServeur.close();
+			} catch (Exception e) {
+				ClientUI.displayWarning("Exception lors de la deconnexion :  " , e.toString());
+			}
+		} 
 	
 	/**
 	 * <strong>Description : </strong> Methode transmettant une chaine de caractères au serveur
