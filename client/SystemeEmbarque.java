@@ -34,7 +34,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	// variable d'activation du requestHandler
 	boolean handling;
 	
-	//variable discriminant la pr�sence d'un affichage
+	//variable discriminant la pr�sence d'un affichage
 	private boolean hasUI;
 
 	// le système d'alarme
@@ -56,7 +56,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
 	 * @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
 	 * @param unLogin - login d'accès au serveur.
-	 * @param unPassword - mot de passe associ� au login d'acc�s.
+	 * @param unPassword - mot de passe associ� au login d'acc�s.
 	 * @param EnsembleDesCapteurs - string contenant les capteurs dont sera doté le système embarqué.
 	 * 
 	 */
@@ -83,7 +83,7 @@ public class SystemeEmbarque extends Client implements Observer {
 		int k = 0;
 		String typeDeCapteur = Ensemble[k];
 		
-		// tnat qu'il y a ds capteurs a ajouter
+		// tnat qu'il y a des capteurs a ajouter
 		while (!typeDeCapteur.equals(null) & k < Ensemble.length)  { //ajouter un à un les capteurs décrits par le string EnsembleDesCapteurs
 				
 			typeDeCapteur = Ensemble[k];
@@ -108,7 +108,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	/**
 	 * <strong>Description : </strong> Constructeur pour le système embarqué
 	 * 
-	 * Cette version impl�mente la pr�sence d'une UI
+	 * Cette version impl�mente la pr�sence d'une UI
 	 * 
 	 * <strong>Exemple : </strong> SystemeEmbarque("monServeur", "newLogin",
 	 * "gps;thermometre")
@@ -116,9 +116,9 @@ public class SystemeEmbarque extends Client implements Observer {
 	 * @param unNomServeur - hostname du serveur que le système embarqué cherche à joindre.
 	 * @param unNumero - numéro de port du serveur que le système embarqué cherche à joindre.
 	 * @param unLogin - login d'accès au serveur.
-	 * @param unPassword - mot de passe associ� au login d'acc�s.
+	 * @param unPassword - mot de passe associ� au login d'acc�s.
 	 * @param EnsembleDesCapteurs - string contenant les capteurs dont sera doté le système embarqué.
-	 * @param unUI - UI associ�e au client.
+	 * @param unUI - UI associ�e au client.
 	 * 
 	 */
 	public SystemeEmbarque(String unNomServeur, int unNumero, String unLogin, String unPassword, FXBoatUI unUI, String EnsembleDesCapteurs) {
@@ -177,7 +177,7 @@ public class SystemeEmbarque extends Client implements Observer {
 	}
 	
 	/**
-	 * <strong>Description : </strong>Retourne s'il y a pr�sence d'une UI.
+	 * <strong>Description : </strong>Retourne s'il y a pr�sence d'une UI.
 	 * 
 	 * @author P. Lledo, S. Queyrut
 	 * @return l'état courant du système embarqué.
@@ -333,7 +333,7 @@ public class SystemeEmbarque extends Client implements Observer {
 			this.changerEtat(this.estVole);
 			System.out.println("[+] Alerte vol !");
 		}else {
-			// TODO remplacer les println par des entr�es dans le log
+			// TODO remplacer les println par des entr�es dans le log
 			this.getUI().getLogList().add("[+] Systeme Embarque se rend compte que l'alarme sonne.");
 			this.getUI().getLogList().add("[+] Le capteur qui s'est mis en branle est : " + (String) arg);
 			this.changerEtat(this.estVole);
