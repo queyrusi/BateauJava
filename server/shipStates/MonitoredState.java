@@ -18,7 +18,7 @@ public class MonitoredState extends ShipState {
 	}
 	
 	public String toString() {
-		return "état Monitored";
+		return "Monitored";
 	}
 
 }

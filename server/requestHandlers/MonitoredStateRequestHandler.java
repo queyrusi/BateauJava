@@ -24,6 +24,7 @@ public class MonitoredStateRequestHandler extends ShipStateRequestHandler {
 	private BufferedReader socketInput;
 	private BufferedWriter socketOutput;
 	private Ship ship;
+	private boolean running;
 
 	/**
 	 * <strong>Description : </strong>Thread gérant les requêtes d'un bateau en état monitored
@@ -36,6 +37,7 @@ public class MonitoredStateRequestHandler extends ShipStateRequestHandler {
 		this.centralContext = (CentralContext) aContext;
 		this.socketInput = socketIn;
 		this.socketOutput = socketOut;
+		this.running = true;
 	}
 	
 	/**
@@ -46,24 +48,30 @@ public class MonitoredStateRequestHandler extends ShipStateRequestHandler {
 public void run() {
 		try {
 			String immatriculation = socketInput.readLine();
+			String password = socketInput.readLine();
 			try {
 				//Changement d'état
 				this.ship = centralContext.getShip(immatriculation);
+				if (this.ship.getPassword() != password.hashCode()) {
+					throw new IllegalArgumentException();
+				}
 				System.out.println("Le bateau est immatriculé : " + immatriculation);
 				ship.setState(new MonitoredState(ship));
 				ship.setRequestHandler(this);
+				ship.setSocketInput(this.socketInput);
+				ship.setSocketOutput(this.socketOutput);
+				this.socketInput = null;
+				this.socketOutput = null;
 				centralContext.addRequestHandler(this);
+				this.ship.getSocketOutput().write("success");
+				this.ship.getSocketOutput().newLine();
+				this.ship.getSocketOutput().flush();
 				//Ecoute
 				String line;
-				boolean running = true;
 				while (running) {
-					line = socketInput.readLine();
+					line = this.ship.getSocketInput().readLine();
 					if (line.compareTo("@quit") == 0) {
-						running = false;
-						this.socketInput.close();
-						this.socketOutput.close();
-						this.ship.setState(new NotMonitoredState(this.ship));
-						this.ship.setRequestHandler(null);
+						this.quitMessage();
 					}
 					else {
 						String[] fields = line.split(" ");
@@ -85,18 +93,22 @@ public void run() {
 								break;
 							case "@state" :
 								if (fields.length == 2 && fields[1].compareTo("stolen") == 0) {
-									socketOutput.write("@ack stolen");
-									socketOutput.newLine();
-									socketOutput.flush();
+									this.ship.getSocketOutput().write("@ack stolen");
+									this.ship.getSocketOutput().newLine();
+									this.ship.getSocketOutput().flush();
 									this.ship.setState(new TrackingState(this.ship));
 									running = false;
-									TrackingStateRequestHandler TSRH = new TrackingStateRequestHandler(ship, this.centralContext, this.socketInput, socketOutput);
+									TrackingStateRequestHandler TSRH = new TrackingStateRequestHandler(ship, this.centralContext);
 									centralContext.addRequestHandler(TSRH);
 									TSRH.start();
 								}
 								else {
 									System.out.println("Message de changement d'état invalide reçu du bateau " + this.ship.getImmatriculation() + " (msg = " + line + ")");
 								}
+								break;
+							case "@req" :
+								this.ship.getUser().getSocketOutput().write("line");
+								this.ship.getUser().getSocketOutput().flush();
 								break;
 							}
 						}
@@ -109,6 +121,18 @@ public void run() {
 			
 			catch (IllegalAccessException e){ //Immatriculation inconnue
 				System.out.println("Tentative de connexion d'un bateau inconnu (immatriculation : "+immatriculation+")");
+				socketOutput.write("login");
+				socketOutput.newLine();
+				socketOutput.flush();
+				socketInput.close(); //ferme le socket associé
+				socketOutput.close();
+			}
+			
+			catch (IllegalArgumentException e) { //Mot de passe éronné
+				System.out.println("Tentative de connexion au bateau immatriculé "+ immatriculation + " avec un mot passe eronné ( mdp : " + password + " )");
+				socketOutput.write("pass");
+				socketOutput.newLine();
+				socketOutput.flush();
 				socketInput.close(); //ferme le socket associé
 				socketOutput.close();
 			}
@@ -120,5 +144,13 @@ public void run() {
 		}
 		this.centralContext.removeRequestHandler(this);
 		
+	}
+	
+	public void quitMessage() throws IOException {
+		this.running = false;
+		this.ship.getSocketInput().close();
+		this.ship.getSocketOutput().close();
+		this.ship.setState(new NotMonitoredState(this.ship));
+		this.ship.setRequestHandler(null);
 	}
 }

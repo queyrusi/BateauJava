@@ -20,7 +20,7 @@ public class NotMonitoredState extends ShipState{
 	}
 	
 	public String toString() {
-		return "état NotMonitored";
+		return "NotMonitored";
 	}
 
 }

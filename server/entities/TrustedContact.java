@@ -26,7 +26,7 @@ public class TrustedContact {
 	 * @author C.Silva, R.Cuinat
 	 * @return Nom de la personne de confiance
 	 */
-	public synchronized String getNom() {
+	public final synchronized String getNom() {
 		return nom;
 	}
 
@@ -35,7 +35,7 @@ public class TrustedContact {
 	 * @author C.Silva, R.Cuinat
 	 * @param nom Nom de la personne de confiance
 	 */
-	public synchronized void setNom(String nom) {
+	public final synchronized void setNom(String nom) {
 		this.nom = nom;
 	}
 
@@ -44,7 +44,7 @@ public class TrustedContact {
 	 * @author C.Silva, R.Cuinat
 	 * @return Email de la personne de confiance
 	 */
-	public synchronized String getEmail() {
+	public final synchronized String getEmail() {
 		return email;
 	}
 
@@ -53,7 +53,7 @@ public class TrustedContact {
 	 * @author C.Silva, R.Cuinat
 	 * @param email Email de la personne de confiance
 	 */
-	public synchronized void setEmail(String email) {
+	public final synchronized void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -62,7 +62,7 @@ public class TrustedContact {
 	 * @author C.Silva, R.Cuinat
 	 * @return Numéro de téléphone de la personne de confiance
 	 */
-	public synchronized int getNum_tel() {
+	public final synchronized int getNum_tel() {
 		return num_tel;
 	}
 
@@ -71,7 +71,7 @@ public class TrustedContact {
 	 * @author C.Silva, R.Cuinat
 	 * @param num_tel Numéro de téléphone de la personne de confiance
 	 */
-	public synchronized void setNum_tel(int num_tel) {
+	public final synchronized void setNum_tel(int num_tel) {
 		this.num_tel = num_tel;
 	}
 

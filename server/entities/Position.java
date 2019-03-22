@@ -21,7 +21,7 @@ public class Position {
 	 * @author C.Silva, R.Cuinat
 	 * @return Latitude,longitude en degrés.
 	 */
-	public double[] getCoordsInDegree() {
+	public final synchronized double[] getCoordsInDegree() {
 		return new double[] {latitude,longitude};
 	}
 	/**
@@ -29,12 +29,12 @@ public class Position {
 	 * @author C.Silva, R.Cuinat
 	 * @return Latitude,longitude en radians.
 	 */	
-	public double[] getCoordsInRad() {
+	public final synchronized double[] getCoordsInRad() {
 		return new double[] {latitude*Math.PI/180,longitude*Math.PI/180};
 	}
 	
 	public String toString() {
-		return "("+this.latitude+" ; "+this.longitude+")";
+		return this.latitude+" ; "+this.longitude;
 	}
 
 }

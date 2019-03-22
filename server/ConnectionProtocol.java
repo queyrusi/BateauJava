@@ -37,7 +37,7 @@ public class ConnectionProtocol implements IProtocole {
 	 * @param anOutputStream Stream de sortie de la connexion
 	 */
 	@Override
-	public void execute(IContext aContext, InputStream anInputStream, OutputStream anOutputStream) throws IllegalArgumentException {
+	public final void execute(IContext aContext, InputStream anInputStream, OutputStream anOutputStream) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		BufferedReader socketIn = new BufferedReader(new InputStreamReader(anInputStream));
 		BufferedWriter socketOut = new BufferedWriter(new OutputStreamWriter(anOutputStream));

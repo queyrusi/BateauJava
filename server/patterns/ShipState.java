@@ -1,7 +1,6 @@
 package server.patterns;
 
 import server.entities.Ship;
-import server.patterns.tcp.RequestHandler;
 
 /**
  * <strong>Description : </strong>Etat abstrait d'un bateau

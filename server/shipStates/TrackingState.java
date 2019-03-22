@@ -19,6 +19,6 @@ public class TrackingState extends ShipState {
 	}
 	
 	public String toString() {
-		return "état Tracking";
+		return "Tracking";
 	}
 }
